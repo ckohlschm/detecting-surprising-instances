@@ -127,3 +127,16 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# application files and folders
+.vscode/
+backend/models/*.png
+frontend/detection/static/detection/models/*.png
+backend/logs/*.csv
+backend/logs/*.xes
+frontend/logs/*.csv
+frontend/logs/*.xes
+/backend
+frontend/detection/static/detection/figures/
+frontend/detection/backend/event_logs/
+frontend/detection/backend/Assignment2/
