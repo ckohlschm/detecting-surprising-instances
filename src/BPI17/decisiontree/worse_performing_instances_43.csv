@@ -1,0 +1,10 @@
+,@@case_id_column,case:LoanGoal@Boat,case:LoanGoal@Business goal,case:LoanGoal@Car,case:LoanGoal@Caravan / Camper,case:LoanGoal@Debt restructuring,case:LoanGoal@Existing loan takeover,case:LoanGoal@Extra spending limit,case:LoanGoal@Home improvement,case:LoanGoal@Motorcycle,case:LoanGoal@Not speficied,"case:LoanGoal@Other, see explanation",case:LoanGoal@Remaining debt home,case:LoanGoal@Tax payments,case:LoanGoal@Unknown,case:ApplicationType@Limit raise,case:ApplicationType@New credit,case:RequestedAmount,@@caseDuration,@@num_occurrence_O_Create Offer,Throughput Time,Surprisingness,Effectiveness
+1430,Application_323872264,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,20000.0,7160031.921999931,4,82 days 20:53:52,60938.333979460476,54844468.50551443
+1652,Application_1741752833,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,30000.0,10335252.018000126,4,119 days 14:54:12,60938.333979460476,54844468.50551443
+1745,Application_2037628374,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,18000.0,11550194.319999933,7,133 days 16:23:14,60938.333979460476,54844468.50551443
+2052,Application_1062630788,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,25000.0,7001559.350999832,4,81 days 00:52:39,60938.333979460476,54844468.50551443
+9430,Application_1875888758,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,15000.0,11583640.323000193,9,134 days 01:40:40,60938.333979460476,54844468.50551443
+12533,Application_1499090661,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,75000.0,9909066.766000032,5,114 days 16:31:07,60938.333979460476,54844468.50551443
+18837,Application_822332970,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,35000.0,7227150.7509999275,7,83 days 15:32:31,60938.333979460476,54844468.50551443
+24367,Application_1656791018,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,35000.0,9078822.86800003,4,105 days 01:53:43,60938.333979460476,54844468.50551443
+28043,Application_654932562,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,29000.0,6531485.76699996,5,75 days 14:18:06,60938.333979460476,54844468.50551443

@@ -1,0 +1,5 @@
+,@@case_id_column,case:LoanGoal@Boat,case:LoanGoal@Business goal,case:LoanGoal@Car,case:LoanGoal@Caravan / Camper,case:LoanGoal@Debt restructuring,case:LoanGoal@Existing loan takeover,case:LoanGoal@Extra spending limit,case:LoanGoal@Home improvement,case:LoanGoal@Motorcycle,case:LoanGoal@Not speficied,"case:LoanGoal@Other, see explanation",case:LoanGoal@Remaining debt home,case:LoanGoal@Tax payments,case:LoanGoal@Unknown,case:ApplicationType@Limit raise,case:ApplicationType@New credit,case:RequestedAmount,@@caseDuration,@@num_occurrence_O_Create Offer,Throughput Time,Surprisingness,Effectiveness
+12989,Application_1099835060,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0.0,6380494.647000074,1,73 days 20:21:35,48199.66514212891,19279857.806851566
+13209,Application_1965726299,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,12000.0,6009156.593000174,1,69 days 13:12:37,48199.66514212891,19279857.806851566
+19562,Application_130761111,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,15000.0,8006933.777000189,1,92 days 16:08:54,48199.66514212891,19279857.806851566
+27274,Application_542586744,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,15000.0,7272950.434000015,1,84 days 04:15:50,48199.66514212891,19279857.806851566

@@ -1,0 +1,295 @@
+Number of situations:                   31509 cases
+Features in event log:            23
+
+=====================Boxplots=====================
+Found a total of 255 surprising instances
+IQR: 1742779.26699996 - lb: -3.0 weeks, 2.0 days, 1.0 hour, 38.0 minutes, 2.0 seconds - ub: 8.0 weeks, 5.0 days, 18.0 hours, 3.0 minutes, 19.0 seconds - Q1: 1.0 week, 4.0 days, 7.0 hours, 47.0 minutes, 31.0 seconds - Q3: 4.0 weeks, 3.0 days, 11.0 hours, 53.0 minutes, 50.0 seconds
+Better performing instances: 0
+Worse performing instances: 255
+=====================Decision Tree=====================
+Found a total of 262 surprising instances
+Better performing instances: 0
+Worse performing instances: 262
+Node: [48]- 197: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer > 2.5, case:LoanGoal@Car > 0.5, @@num_occurrence_O_Create Offer > 3.5]
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 13156075.396505171
+Surprisingness: 43853.59973115937
+Node: [47]- 263: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer > 2.5, case:LoanGoal@Car > 0.5, @@num_occurrence_O_Create Offer <= 3.5, case:RequestedAmount > 7750.0]
+Better performing instances: 0
+Worse performing instances: 2
+Effectiveness: 10342793.410076685
+Surprisingness: 51713.97457890054
+Node: [46]- 110: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer > 2.5, case:LoanGoal@Car > 0.5, @@num_occurrence_O_Create Offer <= 3.5, case:RequestedAmount <= 7750.0]
+Better performing instances: 0
+Worse performing instances: 4
+Effectiveness: 21420662.658226736
+Surprisingness: 53551.69264556684
+Node: [43]- 250: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer > 2.5, case:LoanGoal@Car <= 0.5, case:RequestedAmount > 13162.0, @@num_occurrence_O_Create Offer > 3.5]
+Better performing instances: 0
+Worse performing instances: 9
+Effectiveness: 54844468.50551443
+Surprisingness: 60938.333979460476
+Node: [42]- 566: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer > 2.5, case:LoanGoal@Car <= 0.5, case:RequestedAmount > 13162.0, @@num_occurrence_O_Create Offer <= 3.5]
+Better performing instances: 0
+Worse performing instances: 11
+Effectiveness: 60223353.35374453
+Surprisingness: 54748.52228914134
+Node: [40]- 186: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer > 2.5, case:LoanGoal@Car <= 0.5, case:RequestedAmount <= 13162.0, @@num_occurrence_O_Create Offer > 3.5]
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 16236761.661032835
+Surprisingness: 54122.554837851385
+Node: [39]- 409: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer > 2.5, case:LoanGoal@Car <= 0.5, case:RequestedAmount <= 13162.0, @@num_occurrence_O_Create Offer <= 3.5]
+Better performing instances: 0
+Worse performing instances: 9
+Effectiveness: 46816099.93982512
+Surprisingness: 52017.91060686899
+Node: [35]- 101: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer <= 2.5, case:LoanGoal@Remaining debt home > 0.5, case:RequestedAmount > 24500.0]
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 17240617.020867184
+Surprisingness: 57468.7528088312
+Node: [34]- 126: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer <= 2.5, case:LoanGoal@Remaining debt home > 0.5, case:RequestedAmount <= 24500.0]
+Better performing instances: 0
+Worse performing instances: 6
+Effectiveness: 37737172.676049836
+Surprisingness: 62895.33493627354
+Node: [32]- 929: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer <= 2.5, case:LoanGoal@Remaining debt home <= 0.5, case:LoanGoal@Car > 0.5, case:RequestedAmount > 11650.0]
+Better performing instances: 0
+Worse performing instances: 4
+Effectiveness: 23042600.722238824
+Surprisingness: 57606.506068245064
+Node: [31]- 944: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer <= 2.5, case:LoanGoal@Remaining debt home <= 0.5, case:LoanGoal@Car > 0.5, case:RequestedAmount <= 11650.0]
+Better performing instances: 0
+Worse performing instances: 6
+Effectiveness: 25826036.094319906
+Surprisingness: 43043.39978290605
+Node: [29]- 1863: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer <= 2.5, case:LoanGoal@Remaining debt home <= 0.5, case:LoanGoal@Car <= 0.5, case:RequestedAmount > 16150.0]
+Better performing instances: 0
+Worse performing instances: 45
+Effectiveness: 177082534.34012946
+Surprisingness: 39351.69821085003
+Node: [28]- 2615: [@@num_occurrence_O_Create Offer > 1.5, @@num_occurrence_O_Create Offer <= 2.5, case:LoanGoal@Remaining debt home <= 0.5, case:LoanGoal@Car <= 0.5, case:RequestedAmount <= 16150.0]
+Better performing instances: 0
+Worse performing instances: 25
+Effectiveness: 106532645.24723926
+Surprisingness: 42613.06756352286
+Node: [23]- 142: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit > 0.5, case:LoanGoal@Unknown > 0.5, case:RequestedAmount > 2500.0]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [22]- 1217: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit > 0.5, case:LoanGoal@Unknown > 0.5, case:RequestedAmount <= 2500.0]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [20]- 298: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit > 0.5, case:LoanGoal@Unknown <= 0.5, case:LoanGoal@Remaining debt home > 0.5, case:RequestedAmount > 15750.0]
+Better performing instances: 0
+Worse performing instances: 8
+Effectiveness: 35885190.1394202
+Surprisingness: 44856.51425145645
+Node: [19]- 192: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit > 0.5, case:LoanGoal@Unknown <= 0.5, case:LoanGoal@Remaining debt home > 0.5, case:RequestedAmount <= 15750.0]
+Better performing instances: 0
+Worse performing instances: 4
+Effectiveness: 19279857.806851566
+Surprisingness: 48199.66514212891
+Node: [17]- 6136: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit > 0.5, case:LoanGoal@Unknown <= 0.5, case:LoanGoal@Remaining debt home <= 0.5, case:LoanGoal@Car > 0.5]
+Better performing instances: 0
+Worse performing instances: 13
+Effectiveness: 85740839.65091738
+Surprisingness: 65954.49413662484
+Node: [16]- 11979: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit > 0.5, case:LoanGoal@Unknown <= 0.5, case:LoanGoal@Remaining debt home <= 0.5, case:LoanGoal@Car <= 0.5]
+Better performing instances: 0
+Worse performing instances: 46
+Effectiveness: 265263974.99384993
+Surprisingness: 57666.08532205503
+Node: [12]- 102: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit <= 0.5, case:LoanGoal@Unknown > 0.5, case:RequestedAmount > 3000.0]
+Better performing instances: 0
+Worse performing instances: 4
+Effectiveness: 8512113.341530565
+Surprisingness: 21280.322177355825
+Node: [11]- 338: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit <= 0.5, case:LoanGoal@Unknown > 0.5, case:RequestedAmount <= 3000.0]
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 8299184.791343165
+Surprisingness: 27663.95809145947
+Node: [9]- 517: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit <= 0.5, case:LoanGoal@Unknown <= 0.5, case:LoanGoal@Car > 0.5, case:RequestedAmount > 11150.0]
+Better performing instances: 0
+Worse performing instances: 29
+Effectiveness: 53846195.352661625
+Surprisingness: 18567.70910179821
+Node: [8]- 232: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit <= 0.5, case:LoanGoal@Unknown <= 0.5, case:LoanGoal@Car > 0.5, case:RequestedAmount <= 11150.0]
+Better performing instances: 0
+Worse performing instances: 2
+Effectiveness: 5503342.930851955
+Surprisingness: 27516.723188742537
+Node: [6]- 306: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit <= 0.5, case:LoanGoal@Unknown <= 0.5, case:LoanGoal@Car <= 0.5, case:RequestedAmount > 34750.0]
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 10480329.443861587
+Surprisingness: 34934.441185420976
+Node: [5]- 1491: [@@num_occurrence_O_Create Offer <= 1.5, case:ApplicationType@New credit <= 0.5, case:LoanGoal@Unknown <= 0.5, case:LoanGoal@Car <= 0.5, case:RequestedAmount <= 34750.0]
+Better performing instances: 0
+Worse performing instances: 20
+Effectiveness: 69208793.6841984
+Surprisingness: 34604.410121777255
+=====================K-Means=====================
+Found a total of 280 surprising instances
+Better performing instances:      0
+Worse performing instances:       280
+ID: 1
+Better performing instances: 0
+Effectiveness: 141792338.6789195
+Surprisingness: 40512.114663132845
+ID: 2
+Better performing instances: 0
+Effectiveness: 60592481.10142536
+Surprisingness: 33662.51012579186
+ID: 3
+Better performing instances: 0
+Effectiveness: 72907950.47715005
+Surprisingness: 42887.034208137484
+ID: 4
+Better performing instances: 0
+Effectiveness: 85740839.65091738
+Surprisingness: 65954.49413662484
+ID: 5
+Better performing instances: 0
+Effectiveness: 160678850.99677792
+Surprisingness: 59510.69585891115
+ID: 6
+Better performing instances: 0
+Effectiveness: 50356859.857907504
+Surprisingness: 55952.071286266015
+ID: 7
+Better performing instances: 0
+Effectiveness: 62280387.55380177
+Surprisingness: 56618.544692145355
+ID: 8
+Better performing instances: 0
+Effectiveness: 181339568.91431206
+Surprisingness: 53335.20730398587
+ID: 9
+Better performing instances: 0
+Effectiveness: 8387289.202043988
+Surprisingness: 41936.45033336404
+ID: 10
+Better performing instances: 0
+Effectiveness: 83201535.41006976
+Surprisingness: 34667.32942183045
+ID: 11
+Better performing instances: 0
+Effectiveness: 4188129.025850376
+Surprisingness: 41881.293333037924
+ID: 12
+Better performing instances: 0
+Effectiveness: 19297878.735070977
+Surprisingness: 27568.412052958538
+ID: 13
+Better performing instances: 0
+ID: 14
+Better performing instances: 0
+Effectiveness: 16365008.141315142
+Surprisingness: 40912.53048116509
+ID: 15
+Better performing instances: 0
+Effectiveness: 3702534.0054925093
+Surprisingness: 37025.34495591519
+ID: 16
+Better performing instances: 0
+Effectiveness: 18633223.730081834
+Surprisingness: 46583.090753776014
+ID: 17
+Better performing instances: 0
+Effectiveness: 8197263.270680836
+Surprisingness: 27324.222458689692
+ID: 18
+Better performing instances: 0
+ID: 19
+Better performing instances: 0
+ID: 20
+Better performing instances: 0
+Effectiveness: 6288269.998739321
+Surprisingness: 62882.721051222994
+ID: 21
+Better performing instances: 0
+Effectiveness: 93635279.828372
+Surprisingness: 52019.603696140475
+ID: 22
+Better performing instances: 0
+Effectiveness: 99554676.27883452
+Surprisingness: 45252.13493695852
+ID: 23
+Better performing instances: 0
+ID: 24
+Better performing instances: 0
+ID: 25
+Better performing instances: 0
+Effectiveness: 136106528.0317103
+Surprisingness: 46933.303283278045
+=====================Similarity Graph=====================
+Found a total of 264 surprising instances
+Better performing instances:      0
+Worse performing instances:       264
+ID: 1
+Better performing instances: 0
+Worse performing instances: 37
+Effectiveness: 205345843.22385502
+Surprisingness: 55498.880473874655
+ID: 2
+Better performing instances: 0
+Worse performing instances: 28
+Effectiveness: 167342062.2176885
+Surprisingness: 59765.03150703519
+ID: 3
+Better performing instances: 0
+Worse performing instances: 34
+Effectiveness: 181339568.91431206
+Surprisingness: 53335.20730398587
+ID: 4
+Better performing instances: 0
+Worse performing instances: 11
+Effectiveness: 62381968.8458687
+Surprisingness: 56710.89099432365
+ID: 5
+Better performing instances: 0
+Worse performing instances: 2
+Effectiveness: 10199462.188433344
+Surprisingness: 50997.316308020374
+ID: 6
+Better performing instances: 0
+Worse performing instances: 67
+Effectiveness: 287703319.1394312
+Surprisingness: 42940.80574393574
+ID: 7
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 15341454.597402424
+Surprisingness: 51138.2015308151
+ID: 8
+Better performing instances: 0
+Worse performing instances: 2
+Effectiveness: 8505934.126658233
+Surprisingness: 42529.67380129117
+ID: 9
+Better performing instances: 0
+Worse performing instances: 0
+ID: 10
+Better performing instances: 0
+Worse performing instances: 9
+Effectiveness: 51005783.841980636
+Surprisingness: 56673.09692519813
+ID: 11
+Better performing instances: 0
+Worse performing instances: 1
+Effectiveness: 3707189.8703999724
+Surprisingness: 37071.90362937286
+ID: 12
+Better performing instances: 0
+Worse performing instances: 0
+ID: 13
+Better performing instances: 0
+Worse performing instances: 70
+Effectiveness: 314262859.4182997
+Surprisingness: 44894.70323899445
+ID: 14
+Better performing instances: 0
+Worse performing instances: 0
