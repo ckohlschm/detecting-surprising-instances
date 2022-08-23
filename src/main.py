@@ -134,8 +134,8 @@ if similarity_graph:
             better_performing_instances.to_csv(str(directory) + "/similaritygraph/better_performing_instances_" + str(vicinity_id) + ".csv")
         f.write(f"Worse performing instances: {len(worse_performing_instances)}\n")
         if len(worse_performing_instances) > 0:
-            f.write(f"Effectiveness: {better_performing_instances['Effectiveness'].mean()}\n")
-            f.write(f"Surprisingness: {better_performing_instances['Surprisingness'].mean()}\n")
+            f.write(f"Effectiveness: {worse_performing_instances['Effectiveness'].mean()}\n")
+            f.write(f"Surprisingness: {worse_performing_instances['Surprisingness'].mean()}\n")
             worse_performing_instances.to_csv(str(directory) + "/similaritygraph/worse_performing_instances_" + str(vicinity_id) + ".csv")
 
 f.close()
