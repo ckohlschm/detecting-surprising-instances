@@ -10,6 +10,6 @@ Install the required modules:
 
 py -m pip install -r requirements.txt
 
-Run the application (go to frontend)
+Run the application (go to src)
 
-py manage.py runserver 0.0.0.0:<port>
+py main.py
