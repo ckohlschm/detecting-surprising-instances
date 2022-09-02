@@ -1,0 +1,102 @@
+{% extends "detection/method_selection.html" %}
+{% load static %}
+
+{% block title %} Select Parameters {% endblock %} 
+
+{% block method_parameters %}
+<!-- Form -->
+<form method="POST">
+    {% csrf_token %}
+    <div>
+        <div class="fs-5 fw-normal mb-2">Target Feature</div>
+        <div class="mb-4">
+            <label class="my-1 me-2" for="situation_type">Type of situation:</label>
+            <select class="form-select" id="situation_type" name="situation_type"  aria-label="Type of situation">
+                <option name="case" value="case" {% if situation_type == 'case' %} selected {% endif %}>Case situation</option>
+                <option name="event" value="event" {% if situation_type == 'event' %} selected {% endif %}>Event situation</option>
+            </select>
+        </div>
+        <div class="mb-4" id="div_situation_activity">
+            <label class="my-1 me-2" for="selected_activity">Activity:</label>
+            <select class="form-select" id="selected_activity" name="selected_activity"  aria-label="Activity">
+                {% for activity_name in activity_names %}
+                <option name="{{activity_name}}" value="{{activity_name}}" {% if activity_name == selected_activity %} selected {% endif %}>{{activity_name}}</option>
+                {% endfor %} 
+            </select>
+        </div>
+        <div class="mb-4" id="event_level_target_features">
+            <label class="my-1 me-2" for="target_attribute">Event Target Feature name:</label>
+            <select class="form-select" id="target_attribute_event" name="target_attribute_event"  aria-label="Target attribute">
+                <option name="elapsed_time" value="elapsed_time" {% if 'elapsed_time' == target_attribute %} selected {% endif %}>Elapsed Time</option> 
+                <option name="next_activity" value="next_activity" {% if 'next_activity' == target_attribute %} selected {% endif %}>Next Activity</option>
+                <option name="previous_activity" value="previous_activity" {% if 'previous_activity' == target_attribute %} selected {% endif %}>Previous Activity</option> 
+            </select>
+        </div>
+        <div class="mb-4" id="case_level_target_features">
+            <label class="my-1 me-2" for="target_attribute">Case Target Feature name:</label>
+            <select class="form-select" id="target_attribute_case" name="target_attribute_case"  aria-label="Target attribute">
+                <option name="@@caseDuration" value="@@caseDuration" {% if '@@caseDuration' == target_attribute %} selected {% endif %}>Case Duration</option> 
+                <option name="case_delay" value="case_delay" {% if 'case_delay' == target_attribute %} selected {% endif %}>Delay</option> 
+            </select>
+        </div>
+    </div>
+    <!-- <div class="mb-4">
+        <label class="my-1 me-2" for="target_attribute_type">Target attribute type:</label>
+        <select class="form-select" id="target_attribute_type" name="target_attribute_type"  aria-label="Target attribute type">
+            <option name="categorical" value="categorical" {% if target_attribute_type == 'categorical' %} selected {% endif %}>Categorical</option>
+            <option name="numerical" value="numerical" {% if target_attribute_type == 'numerical' %} selected {% endif %}>Numerical</option>
+        </select>
+    </div> -->
+    <div>
+        <div class="fs-5 fw-normal mb-2">Vicinity Detection</div>
+        <div class="mb-4">
+            <label class="my-1 me-2" for="vicinity_detection_method">Vicinity Detecion Method:</label>
+            <select class="form-select" id="vicinity_detection_method" name="vicinity_detection_method"  aria-label="Vicinity Detection Method">
+                <option name="classification_decision_tree" value="classification_decision_tree" {% if 'classification_decision_tree' == target_attribute %} selected {% endif %}>Decision Tree</option> 
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="my-1 me-2" for="max_depth_decision_tree">Decision Tree maximum depth:</label>
+            <input type="number" id="max_depth_decision_tree" name="max_depth_decision_tree" min="2" max="10" value="{{ max_depth_decision_tree }}">
+        </div>
+        <div class="mb-4">
+            <label class="my-1 me-2" for="descriptive_attributes">Descriptive Case Features:</label>
+            <select class="form-select" id="descriptive_attributes" name="descriptive_attributes" style="resize: vertical" aria-label="Descriptive attributes" multiple>
+                {% for feature in feature_names %}
+                <option name="{{ feature }}" value="{{ feature }}" {% if feature in selected_feature_names %} selected {% endif %}>{{ feature }}</option>
+                {% endfor %} 
+            </select>
+        </div>
+    </div>
+    <div>
+        <div class="fs-5 fw-normal mb-2">Surprising Instance Detection</div>
+        <div class="mb-4">
+            <label class="my-1 me-2" for="detector_function">Detector function:</label>
+            <select class="form-select" id="detector_function" name="detector_function"  aria-label="Detector function">
+                <option name="boxplot" value="boxplot" {% if detector_function == 'boxplot' %} selected {% endif %}>Boxplot</option>
+                <option name="threshold" value="threshold" {% if detector_function == 'threshold' %} selected {% endif %}>Threshold</option>
+            </select>
+        </div>
+        <div class="mb-4" id="div_numerical_threshold">
+            <label class="my-1 me-2" for="target_attribute_threshold">Numerical Threshold:</label>
+            <input type="range" id="target_attribute_threshold" name="target_attribute_threshold" min="1" max="8550000" value="{{ target_attribute_threshold }}">
+            <label id="caseDuration">2 days</label>
+        </div>
+    </div>
+    <!--<div class="mb-4">
+        <label class="my-1 me-2" for="correlation_method">Correlation method:</label>
+        <select class="form-select" id="supervised_learning_correlation_method" name="supervised_learning_correlation_method"  aria-label="Target attribute type">
+            <option name="supervised_learning_correlation_method_pearson" value="supervised_learning_correlation_method_pearson" {% if supervised_learning_correlation_method == 'supervised_learning_correlation_method_pearson' %} selected {% endif %}>Pearson</option>
+            <option name="supervised_learning_correlation_method_assoc_rules" value="supervised_learning_correlation_method_assoc_rules" {% if supervised_learning_correlation_method == 'supervised_learning_correlation_method_assoc_rules' %} selected {% endif %}>Association Rules</option>
+        </select>
+    </div>
+    <div class="mb-4">
+        <label class="my-1 me-2" for="supervised_learning_correlation_threshold">Correlation Threshold:</label>
+        <input type="number" id="supervised_learning_correlation_threshold" name="supervised_learning_correlation_threshold" min="0" max="1" step="0.01" value="{{ supervised_learning_correlation_threshold }}">
+    </div> -->    
+    <div class="d-flex">
+        <button type="submit" id="submit_parameters_supervised_learning" name="submit_parameters_supervised_learning" class="btn btn-primary">Detect Surprising Instances</button>
+    </div>
+</form>
+<!-- End of Form -->
+{% endblock method_parameters %}
