@@ -1,22 +1,15 @@
 from pm4py.visualization.decisiontree import visualizer as dectree_visualizer
-from causallearn.search.ConstraintBased.FCI import fci
-from causallearn.graph.Endpoint import Endpoint
 from sklearn import tree
 import numpy as np
 import pandas as pd
 import json
-import dowhy
 from dowhy import CausalModel
 from cdt.causality.graph import LiNGAM, PC, GES
-from rpy2.robjects import r as R
-import matplotlib.pyplot as plt
 
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing
 import graphviz
 import networkx as nx 
-
 
 def train_dt_classifier(pd_data, descriptive_feature_names, target_feature_name, maxDepth):
     # Filter descriptive data
