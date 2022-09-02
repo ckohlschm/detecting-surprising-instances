@@ -7,21 +7,45 @@
 <!-- Form -->
 <form method="POST">
     {% csrf_token %}
-    <div class="mb-4">
+    <div>
+        <div class="fs-5 fw-normal mb-2">Target Feature</div>
+        <!-- <div class="mb-4">
+            <label class="my-1 me-2" for="situation_type">Type of situation:</label>
+            <select class="form-select" id="situation_type" name="situation_type"  aria-label="Type of situation">
+                <option name="case" value="case" {% if situation_type == 'case' %} selected {% endif %}>Case situation</option>
+                <option name="event" value="event" {% if situation_type == 'event' %} selected {% endif %}>Event situation</option>
+            </select>
+        </div>
+        <div class="mb-4" id="div_situation_activity">
+            <label class="my-1 me-2" for="selected_activity">Activity:</label>
+            <select class="form-select" id="selected_activity" name="selected_activity"  aria-label="Activity">
+                {% for activity_name in activity_names %}
+                <option name="{{activity_name}}" value="{{activity_name}}" {% if activity_name == selected_activity %} selected {% endif %}>{{activity_name}}</option>
+                {% endfor %} 
+            </select>
+        </div> -->
+        <div class="mb-4">
+            <label class="my-1 me-2" for="target_attribute">Target Feature name:</label>
+            <select class="form-select" id="target_attribute" name="target_attribute"  aria-label="Target attribute">
+                <option name="@@caseDuration" value="@@caseDuration" {% if '@@caseDuration' == target_attribute %} selected {% endif %}>Case Duration</option> 
+            </select>
+        </div>
+    </div>
+    <!-- <div class="mb-4">
         <label class="my-1 me-2" for="target_attribute">Performance Related Target Feature:</label>
         <select class="form-select" id="target_attribute" name="target_attribute"  aria-label="Performance related target attribute">
             {% for feature in feature_names %}
             <option name="{{ feature }}" value="{{ feature }}" {% if feature == target_attribute %} selected {% endif %}>{{ feature }}</option>
             {% endfor %} 
         </select>
-    </div>
-    <div class="mb-4">
+    </div> -->
+    <!-- <div class="mb-4">
         <label class="my-1 me-2" for="target_attribute_type">Target attribute type:</label>
         <select class="form-select" id="target_attribute_type" name="target_attribute_type"  aria-label="Target attribute type">
             <option name="categorical" value="categorical" {% if target_attribute_type == 'categorical' %} selected {% endif %}>Categorical</option>
             <option name="numerical" value="numerical" {% if target_attribute_type == 'numerical' %} selected {% endif %}>Numerical</option>
         </select>
-    </div>
+    </div> -->
     <div class="mb-4">
         <label class="my-1 me-2" for="distance">Distance function:</label>
         <select class="form-select" id="similarity_graph_distance_function" name="similarity_graph_distance_function"  aria-label="Distance function">
@@ -39,7 +63,7 @@
     </div>
     <div class="mb-4">
         <label class="my-1 me-2" for="similarity_graph_distance_max">Maximum distance:</label>
-        <input type="number" id="similarity_graph_distance_max" name="similarity_graph_distance_max" min="1" max="10" value="{{ similarity_graph_distance_max }}">
+        <input type="number" id="similarity_graph_distance_max" name="similarity_graph_distance_max" value="{{ similarity_graph_distance_max }}">
     </div>
     <div>
         <div class="fs-5 fw-normal mb-2">Surprising Instance Detection</div>
@@ -52,7 +76,7 @@
         </div>
         <div class="mb-4" id="div_numerical_threshold">
             <label class="my-1 me-2" for="target_attribute_threshold">Numerical Threshold:</label>
-            <input type="range" id="target_attribute_threshold" name="target_attribute_threshold" min="1" max="8550000" value="{{ target_attribute_threshold }}">
+            <input type="range" id="target_attribute_threshold" name="target_attribute_threshold" value="{{ target_attribute_threshold }}">
             <label id="caseDuration">2 days</label>
         </div>
     </div>

@@ -34,9 +34,17 @@ def read_parameters_similarity_graph(request):
     target_attribute_name = request.POST['target_attribute']
     request.session['target_attribute'] = target_attribute_name
     print('Selected target attribute: ' + str(target_attribute_name))
-    target_attribute_type = request.POST['target_attribute_type']
-
+    
+    #target_attribute_type = request.POST['target_attribute_type']
+    #request.session['target_attribute_type'] = target_attribute_type
+    #print('Selected target attribute type: ' + str(target_attribute_type))
+    
+    if target_attribute_name == 'delay':
+        target_attribute_type = 'categorical' # request.POST['target_attribute_type']
+    else:
+        target_attribute_type = 'numerical' # request.POST['target_attribute_type']
     request.session['target_attribute_type'] = target_attribute_type
+    
     print('Selected target attribute type: ' + str(target_attribute_type))
     target_attribute_threshold = request.POST['target_attribute_threshold']
     request.session['target_attribute_threshold'] = target_attribute_threshold

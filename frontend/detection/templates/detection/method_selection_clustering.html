@@ -9,7 +9,7 @@
     {% csrf_token %}
     <div>
         <div class="fs-5 fw-normal mb-2">Target Feature</div>
-        <div class="mb-4">
+        <!-- <div class="mb-4">
             <label class="my-1 me-2" for="situation_type">Type of situation:</label>
             <select class="form-select" id="situation_type" name="situation_type"  aria-label="Type of situation">
                 <option name="case" value="case" {% if situation_type == 'case' %} selected {% endif %}>Case situation</option>
@@ -23,11 +23,11 @@
                 <option name="{{activity_name}}" value="{{activity_name}}" {% if activity_name == selected_activity %} selected {% endif %}>{{activity_name}}</option>
                 {% endfor %} 
             </select>
-        </div>
+        </div> -->
         <div class="mb-4">
             <label class="my-1 me-2" for="target_attribute_case">Target Feature name:</label>
             <select class="form-select" id="target_attribute_case" name="target_attribute_case"  aria-label="Target attribute">
-                <option name="@@caseDuration" value="@@caseDuration" {% if '@@caseDuration' == target_attribute %} selected {% endif %}>@@caseDuration</option> 
+                <option name="@@caseDuration" value="@@caseDuration" {% if '@@caseDuration' == target_attribute %} selected {% endif %}>Case Duration</option> 
             </select>
         </div>
     </div>
