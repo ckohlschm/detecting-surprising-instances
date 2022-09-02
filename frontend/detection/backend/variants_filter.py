@@ -11,15 +11,15 @@ def get_variants(log_path, variant_filter_strategy):
     event_log = import_file(log_path, False)
     variants_count = case_statistics.get_variant_statistics(event_log)
     all_variants = {}
-    #for variant in variants_count:
+    for variant in variants_count:
         # Filter for current variant
-        #variants = []
-        #variants.append(variant['variant'])
-        #filtered_log = variants_filter.apply(event_log, variants)
+        variants = []
+        variants.append(variant['variant'])
+        filtered_log = variants_filter.apply(event_log, variants)
         # Case duration for this variant
-        #all_case_durations = case_statistics.get_all_casedurations(filtered_log)
-        #variant['durations'] = all_case_durations
-        #variant['avg_duration'] = mean(all_case_durations)
+        all_case_durations = case_statistics.get_all_casedurations(filtered_log)
+        variant['durations'] = all_case_durations
+        variant['avg_duration'] = mean(all_case_durations)
 
     #print(variants_count)
     if variant_filter_strategy == 'least_common_variant':
@@ -46,7 +46,7 @@ def get_variants(log_path, variant_filter_strategy):
         variant_dict['Percentage Number'] = rounded_decimal_percentage
         rounded_decimal_percentage = round(rounded_decimal_percentage, 0)
         variantsdata_piechart.append(rounded_decimal_percentage)
-        avg_variant_case_duration = 0 # mean(variant['durations'])
+        avg_variant_case_duration = mean(variant['durations'])
         avg_variant_case_duration = round(avg_variant_case_duration, 0)
         duration = datetime.timedelta(seconds=avg_variant_case_duration)
         variant_dict['Throughput time'] = str(duration)
@@ -65,13 +65,13 @@ def get_variants(log_path, variant_filter_strategy):
         for variant in variants_count[10:]:
             variants.append(variant['variant'])
             accumulate_count = accumulate_count + variant['count']
-            #durations_list.extend(variant['durations'])
+            durations_list.extend(variant['durations'])
             all_variants[index_count] = variant['variant']
             index_count = index_count + 1
         filtered_log = variants_filter.apply(event_log, variants)
         decimal_percentage = accumulate_count / len(event_log)
         percentage = "{:.2%}".format(decimal_percentage)
-        avg_variant_case_duration = 0 # mean(durations_list)
+        avg_variant_case_duration = mean(durations_list)
         avg_variant_case_duration = round(avg_variant_case_duration, 0)
         duration = datetime.timedelta(seconds=avg_variant_case_duration)
         rounded_decimal_percentage = round(decimal_percentage, 2)
