@@ -58,9 +58,12 @@ class SurprisingInstance:
         self.conditions = conditions
 
     def calculateDifference(self):
-        if self.target_data > self.actual_data:
-            return round(self.target_data - self.actual_data, 2)
-        return round(self.actual_data - self.target_data, 2)
+        if isinstance(self.target_data, float) and isinstance(self.actual_data, float):
+            if self.target_data > self.actual_data:
+                return round(self.target_data - self.actual_data, 2)
+            return round(self.actual_data - self.target_data, 2)
+        else:
+            return 0
 
     def convertToDatetime(self):
         return datetime.timedelta(seconds=round(self.calculateDifference(), 0))

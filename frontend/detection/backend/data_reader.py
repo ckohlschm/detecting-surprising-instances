@@ -12,6 +12,13 @@ def transform_to_dataframe(event_log, parameters):
     pd_data = pd.DataFrame(data, columns=feature_names)
     return pd_data, feature_names
 
+def add_delay(pd_data):
+    pd_data_copy = pd_data.copy()
+    iqr = pd_data_copy['@@caseDuration'].quantile(.75) - pd_data_copy['@@caseDuration'].quantile(.25)
+    threshold = pd_data_copy['@@caseDuration'].quantile(.75) + 1.5 * iqr
+    pd_data_copy['@@delay'] = pd_data_copy.apply (lambda row: row['@@caseDuration'] > threshold, axis=1)
+    return pd_data_copy
+
 def transform_log_to_features(log_path, event_log=None):
     parameters = {}
     parameters["add_case_identifier_column"] = True
@@ -24,6 +31,8 @@ def transform_log_to_features(log_path, event_log=None):
     if not event_log:
         event_log = import_file(path=log_path, filter=False)
     pd_data, feature_names = transform_to_dataframe(event_log=event_log, parameters=parameters)
+    pd_data = add_delay(pd_data)
+    feature_names.append('@@delay')
     print('Extracted features: ' + str(pd_data.head()))
     result = pd_data.to_json(orient="split")
     return result, feature_names
@@ -40,4 +49,6 @@ def transform_log_to_feature_table(log_path, event_log=None):
     if not event_log:
         event_log = import_file(path=log_path, filter=False)
     pd_data, feature_names = transform_to_dataframe(event_log=event_log, parameters=parameters)
+    pd_data = add_delay(pd_data)
+    feature_names.append('@@delay')
     return pd_data, feature_names

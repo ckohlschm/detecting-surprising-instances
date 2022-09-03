@@ -165,7 +165,7 @@
                         <div class="col-12">
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
-                                <label>Node ID:</label>
+                                <label>Vicinity ID:</label>
                                 <select class="leaf_select" id="leaf_select" name="leaf_select" onchange="this.form.submit()" aria-label="Currently selected leaf id">
                                     {% for leaf_id in leaf_ids %}
                                     <option name="leaf_id{{ leaf_id }}" value="{{ leaf_id }}" {% if leaf_id == selected_leaf_id %} selected {% endif %} >{{ leaf_id }}</option>
@@ -234,7 +234,7 @@
                         <div class="col-12">
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
-                                <label>Node ID:</label>
+                                <label>Vicinity ID:</label>
                                 <select class="leaf_select" id="leaf_select" name="leaf_select" onchange="this.form.submit()" aria-label="Currently selected leaf id">
                                     {% for leaf_id in leaf_ids %}
                                     <option name="leaf_id{{ leaf_id }}" value="{{ leaf_id }}" {% if leaf_id == selected_leaf_id %} selected {% endif %} >{{ leaf_id }}</option>
@@ -308,7 +308,7 @@
                 <div class="d-flex ms-auto">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <label>Node ID:</label>
+                        <label>Vicinity ID:</label>
                         <select class="leaf_select" id="leaf_select" name="leaf_select" onchange="this.form.submit()" aria-label="Currently selected leaf id">
                             {% for leaf_id in leaf_ids %}
                             <option name="leaf_id{{ leaf_id }}" value="{{ leaf_id }}" {% if leaf_id == selected_leaf_id %} selected {% endif %} >{{ leaf_id }}</option>
@@ -325,7 +325,6 @@
                                 <th>ID</th>
                                 <th>Predicted value</th>
                                 <th>Actual value</th>
-                                <th>Leaf ID</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -334,7 +333,6 @@
                                     <td>{{ surprising_instance.id }}</td>
                                     <td>{{ surprising_instance.actual_data }}</td>
                                     <td>{{ surprising_instance.target_data }}</td>
-                                    <td><span class="text-danger fw-bold"> {{ surprising_instance.leaf_id }} </span></td>
                                 </tr>
                             {% endfor %} 
                         </tbody>

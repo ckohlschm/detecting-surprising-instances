@@ -4,12 +4,13 @@ import numpy as np
 import pandas as pd
 import json
 from dowhy import CausalModel
-from cdt.causality.graph import LiNGAM, PC, GES
+from cdt.causality.graph import GES
 
 import numpy as np
 import pandas as pd
 import graphviz
 import networkx as nx 
+
 
 def train_dt_classifier(pd_data, descriptive_feature_names, target_feature_name, maxDepth):
     # Filter descriptive data
@@ -27,7 +28,6 @@ def train_dt_classifier(pd_data, descriptive_feature_names, target_feature_name,
     print('Target Classes: ' + str(dict(zip(unique, counts))) + '|MaxDepth: ' + str(maxDepth))
 
     # Create DT Classifier
-    #clf = RandomForestClassifier(max_depth=7)
     clf = tree.DecisionTreeClassifier(max_depth=maxDepth, random_state=11)
     
     clf.fit(descriptive_feature_data, target_feature_data)
@@ -318,7 +318,6 @@ def apply_root_cause_analysis(request, context):
         print("Causal Discovery Method : %s"%(method))
         
         # Obtain valid dot format
-        #graph.edge('O_Create Offer_MonthlyCost', 'TARGET_O_Create Offer_Selected', label='0.4')
         print(graph.source)
         graph_dot = str_to_dot(graph.source)
         print(graph_dot)
@@ -442,6 +441,7 @@ def estimate_treatment_effect(request, context):
     selected_feature_names = request.session['selected_feature_names']
     print(selected_feature_names)
     selected_feature_names.append(request.session['target_attribute'])
+    
     #print(data_in_vicinity.head())
     #print(data_in_vicinity.columns.to_list())
     #features_to_delete = ['@@case_id_column', 'case:ApplicationType@Limit raise', 'event:EventOrigin@Application', 'event:EventOrigin@Offer', 'event:EventOrigin@Workflow', 'event:Action@Created', 'event:Action@Deleted', 'event:Action@Obtained', 'event:Action@Released', 'event:Action@statechange', 'event:concept:name@A_Accepted', 'event:concept:name@A_Cancelled', 'event:concept:name@A_Complete', 'event:concept:name@A_Concept', 'event:concept:name@A_Create Application', 'event:concept:name@A_Denied', 'event:concept:name@A_Incomplete', 'event:concept:name@A_Pending', 'event:concept:name@A_Submitted', 'event:concept:name@A_Validating', 'event:concept:name@O_Accepted', 'event:concept:name@O_Cancelled', 'event:concept:name@O_Created', 'event:concept:name@O_Refused', 'event:concept:name@O_Returned', 'event:concept:name@O_Sent (mail and online)', 'event:concept:name@O_Sent (online only)', 'event:concept:name@W_Assess potential fraud', 'event:concept:name@W_Call after offers', 'event:concept:name@W_Call incomplete files', 'event:concept:name@W_Complete application', 'event:concept:name@W_Handle leads', 'event:concept:name@W_Personal Loan collection', 'event:concept:name@W_Shortened completion ', 'event:concept:name@W_Validate application',  '@@max_concurrent_activities_general', '@@num_occurrence_O_Cancelled', '@@num_occurrence_A_Pending', '@@num_occurrence_W_Handle leads', '@@num_occurrence_O_Returned', '@@num_occurrence_A_Cancelled', '@@num_occurrence_A_Validating', '@@num_occurrence_A_Incomplete', '@@num_occurrence_A_Accepted', '@@num_occurrence_A_Concept', '@@num_occurrence_W_Personal Loan collection', '@@num_occurrence_A_Complete', '@@num_occurrence_W_Call after offers', '@@num_occurrence_A_Create Application', '@@num_occurrence_A_Submitted', '@@num_occurrence_W_Shortened completion ', '@@num_occurrence_O_Created', '@@num_occurrence_O_Accepted', '@@num_occurrence_O_Refused', '@@num_occurrence_W_Complete application', '@@num_occurrence_O_Sent (mail and online)', '@@num_occurrence_W_Assess potential fraud', '@@num_occurrence_W_Validate application', '@@num_occurrence_A_Denied', '@@num_occurrence_W_Call incomplete files', '@@num_occurrence_O_Sent (online only)', '@@case_id_column', 'case:ApplicationType@Limit raise', 'event:EventOrigin@Application', 'event:EventOrigin@Offer', 'event:EventOrigin@Workflow', 'event:Action@Created', 'event:Action@Deleted', 'event:Action@Obtained', 'event:Action@Released', 'event:Action@statechange', 'event:concept:name@A_Accepted', 'event:concept:name@A_Cancelled', 'event:concept:name@A_Complete', 'event:concept:name@A_Concept', 'event:concept:name@A_Create Application', 'event:concept:name@A_Denied', 'event:concept:name@A_Incomplete', 'event:concept:name@A_Pending', 'event:concept:name@A_Submitted', 'event:concept:name@A_Validating', 'event:concept:name@O_Accepted', 'event:concept:name@O_Cancelled', 'event:concept:name@O_Created', 'event:concept:name@O_Refused', 'event:concept:name@O_Returned', 'event:concept:name@O_Sent (mail and online)', 'event:concept:name@O_Sent (online only)', 'event:concept:name@W_Assess potential fraud', 'event:concept:name@W_Call after offers', 'event:concept:name@W_Call incomplete files', 'event:concept:name@W_Complete application', 'event:concept:name@W_Handle leads', 'event:concept:name@W_Personal Loan collection', 'event:concept:name@W_Shortened completion ', 'event:concept:name@W_Validate application',  '@@max_concurrent_activities_general', '@@num_occurrence_O_Cancelled', '@@num_occurrence_A_Pending', '@@num_occurrence_W_Handle leads', '@@num_occurrence_O_Returned', '@@num_occurrence_A_Cancelled', '@@num_occurrence_A_Validating', '@@num_occurrence_A_Incomplete', '@@num_occurrence_A_Accepted', '@@num_occurrence_A_Concept', '@@num_occurrence_W_Personal Loan collection', '@@num_occurrence_A_Complete', '@@num_occurrence_W_Call after offers', '@@num_occurrence_A_Create Application', '@@num_occurrence_A_Submitted', '@@num_occurrence_W_Shortened completion ', '@@num_occurrence_O_Created', '@@num_occurrence_O_Accepted', '@@num_occurrence_O_Refused', '@@num_occurrence_W_Complete application', '@@num_occurrence_O_Sent (mail and online)', '@@num_occurrence_W_Assess potential fraud', '@@num_occurrence_W_Validate application', '@@num_occurrence_A_Denied', '@@num_occurrence_W_Call incomplete files', '@@num_occurrence_O_Sent (online only)']

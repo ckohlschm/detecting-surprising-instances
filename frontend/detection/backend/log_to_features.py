@@ -631,7 +631,7 @@ def count_activity_occurrence(log: EventLog, parameters: Optional[Dict[Union[str
     else:
         activities = list(set(y[activity_key] for x in log for y in x))
 
-    feature_names = ["num_occurrence_"+x for x in activities]
+    feature_names = ["@@num_occurrence_"+x for x in activities]
     data = []
 
     for trace in log:

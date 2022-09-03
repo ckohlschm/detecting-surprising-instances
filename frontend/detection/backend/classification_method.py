@@ -1,12 +1,13 @@
-import datetime
+import numpy as np
+import pandas as pd
+from sklearn import tree
+from pm4py.visualization.decisiontree import visualizer as dectree_visualizer
 
-from pm4py.statistics.attributes.log.get import get_all_trace_attributes_from_log, get_all_event_attributes_from_log
-
-from .feature_extraction import extract_features, Variants
 from .data_reader import transform_log_to_feature_table
-from .variants_filter import get_variants, apply_variant_filter
-from .detection import detect_surprising_instances as detect_surprising_instances_algorithm
 from .root_cause_analysis import find_cause_for_instance
+from .detection_util import calculate_surprising_instance_statistics, filter_results_by_vicinity_id, import_and_filter_event_log, get_len_surprising_instances, read_session_parameters, transform_event_log_to_situations
+from .models import SurprisingInstance, Condition, Node
+
 
 def apply_supervised_learning(request, context):
     if 'leaf_select' in request.POST:
@@ -16,113 +17,6 @@ def apply_supervised_learning(request, context):
     
     context, event_log, surprising_instances_len = detect_surprising_instances(request, context)
     context = calculate_surprising_instance_statistics(event_log, surprising_instances_len, context)
-    return context
-
-def calculate_surprising_instance_statistics(all_cases, surprising_instances_len, context):
-    surprising_instance_count = surprising_instances_len
-    all_cases_count = len(all_cases)
-    surprising_instance_percentage = surprising_instance_count / all_cases_count
-    surprising_instance_percentage = round(surprising_instance_percentage * 100, 2)
-    context['surprising_instance_count'] = surprising_instance_count
-    context['non_surprising_instance_count'] = all_cases_count - surprising_instance_count
-    context['all_cases_count'] = all_cases_count
-    print('Instance percentage: ' + str(surprising_instance_percentage))
-    context['surprising_instance_percentage'] = surprising_instance_percentage
-    non_surprising_instance_percentage = 100 - surprising_instance_percentage
-    non_surprising_instance_percentage = round(non_surprising_instance_percentage, 2)
-    context['non_surprising_instance_percentage'] = non_surprising_instance_percentage
-    piechartdata = []
-    piechartdata.append(surprising_instance_percentage)
-    piechartdata.append(non_surprising_instance_percentage)
-    context['surprisinginstancedatapiechart'] = piechartdata
-    return context
-
-def import_and_filter_event_log(request):
-    log_path = request.session['log_path']
-    variant_filter_strategy = request.session.get('variant_filter_strategy', 'most_common_variant')
-    event_log, variants_pd_data, all_variants, variantsdata_piechart = get_variants(log_path, variant_filter_strategy)
-    selected_variants = request.session.get('selected_variants', None)
-    if not selected_variants:
-        default_selection = [key for key in all_variants.keys() if key <= 10]
-        if len(all_variants.keys()) > 10:
-            default_selection.append('Other')
-        request.session['selected_variants'] = default_selection
-        selected_variants = default_selection
-    filtered_log = apply_variant_filter(event_log, all_variants, selected_variants)
-    return filtered_log
-
-def filter_results_by_leaf_id(request, surprising_instances, context):
-    leaf_ids = list(surprising_instances.keys())
-
-    if len(leaf_ids) > 0:
-        selected_leaf_id = int(request.session.get('selected_leaf_id', leaf_ids[-1]))
-    else:
-        selected_leaf_id = int(request.session.get('selected_leaf_id', 0))
-
-    list_better_performance = []
-    list_worse_performance = []
-    list_all_better_performance = []
-    list_all_worse_performance = []
-    surprising_instances_to_show = []
-    barchartleafiddatabetter = []
-    barchartleafiddataworse = []
-    for node_id, value in surprising_instances.items():
-        node, better_performing_instances, worse_performing_instances, surprising_instances_better, surprising_instances_worse = value
-        for instance in surprising_instances_better:
-            list_all_better_performance.append(instance.actual_data)
-        for instance in surprising_instances_worse:
-            list_all_worse_performance.append(instance.actual_data)
-        barchartleafiddatabetter.append(len(surprising_instances_better))
-        barchartleafiddataworse.append(len(surprising_instances_worse))
-        if int(node_id) == int(selected_leaf_id):
-            surprising_instances_to_show = surprising_instances_better + surprising_instances_worse
-            for instance in surprising_instances_better:
-                list_better_performance.append(instance.actual_data)
-            for instance in surprising_instances_worse:
-                list_worse_performance.append(instance.actual_data)
-        
-    surprising_instances_to_show.sort(key=lambda x: x.calculateDifference(), reverse=True)
-
-    context['barchartleafiddatabetter'] = barchartleafiddatabetter
-    context['barchartleafiddataworse'] = barchartleafiddataworse
-    context['selected_leaf_id'] = selected_leaf_id
-    request.session['selected_leaf_id'] = selected_leaf_id
-    context['surprising_instances'] = surprising_instances_to_show
-    
-    if len(list_better_performance) > 0:
-        if request.session['target_attribute'] == '@@caseDuration':
-             context['avg_better_leaf_performance'] = datetime.timedelta(seconds=round(sum(list_better_performance) / len(list_better_performance), 0))
-        else:
-            context['avg_better_leaf_performance'] = round(sum(list_better_performance) / len(list_better_performance), 2)
-    else:
-        context['avg_better_leaf_performance'] = 0
-    if len(list_worse_performance) > 0:
-        if request.session['target_attribute'] == '@@caseDuration':
-             context['avg_worse_leaf_performance'] = datetime.timedelta(seconds=round(sum(list_worse_performance) / len(list_worse_performance), 0))
-        else:
-            context['avg_worse_leaf_performance'] = round(sum(list_worse_performance) / len(list_worse_performance), 2)
-    else:
-        context['avg_worse_leaf_performance'] = 0
-
-    if len(list_all_better_performance) > 0:
-        if request.session['target_attribute'] == '@@caseDuration':
-             context['avg_all_better_performance'] = datetime.timedelta(seconds=round(sum(list_all_better_performance) / len(list_all_better_performance), 0))
-        else:
-            context['avg_all_better_performance'] = round(sum(list_all_better_performance) / len(list_all_better_performance), 2)
-    else: 
-        context['avg_all_better_performance'] = 0
-    if len(list_all_worse_performance) > 0:
-        if request.session['target_attribute'] == '@@caseDuration':
-             context['avg_all_worse_performance'] = datetime.timedelta(seconds=round(sum(list_all_worse_performance) / len(list_all_worse_performance), 0))
-        else:
-            context['avg_all_worse_performance'] = round(sum(list_all_worse_performance) / len(list_all_worse_performance), 2)
-    else: 
-        context['avg_all_worse_performance'] = 0
-
-    context['num_better_leaf'] = len(list_better_performance)
-    context['num_worse_leaf'] = len(list_worse_performance)
-    context['leaf_ids'] = leaf_ids
-    #request.session['leaf_ids'] = leaf_ids
     return context
 
 def label_surprising_better(row, surprising_instances):
@@ -151,48 +45,380 @@ def root_cause_analysis_dt(surprising_instances, selected_leaf_id, pd_data_event
             find_cause_for_instance(pd_data_event_log, instance, ['@@surprising_worse'], 'dt_rca_worse')
             break
 
-def get_len_surprising_instances(surprising_instances):
-    all_surprising_instances = []
-    for node_id, value in surprising_instances.items():
-        node, better_performing_instances, worse_performing_instances, surprising_instances_better, surprising_instances_worse = value
-        for instance in surprising_instances_better:
-            if instance.id not in all_surprising_instances:
-                all_surprising_instances.append(instance.id)
-        for instance in surprising_instances_worse:
-            if instance.id not in all_surprising_instances:
-                all_surprising_instances.append(instance.id)
-    return len(all_surprising_instances)
+def traverse_tree(clf, feature_names):
+    nodes = []
+
+    n_nodes = clf.tree_.node_count
+    children_left = clf.tree_.children_left
+    children_right = clf.tree_.children_right
+    feature = clf.tree_.feature
+    threshold = clf.tree_.threshold
+    n_node_samples = clf.tree_.n_node_samples
+
+    node_depth = np.zeros(shape=n_nodes, dtype=np.int64)
+    is_leaves = np.zeros(shape=n_nodes, dtype=bool)
+    stack = [(0, 0, [])]  # start with the root node id (0) and its depth (0)
+    while len(stack) > 0:
+        # `pop` ensures each node is only visited once
+        node_id, depth, conditions = stack.pop()
+        node_depth[node_id] = depth
+        # If the left and right child of a node is not the same we have a split
+        # node
+        is_split_node = children_left[node_id] != children_right[node_id]
+        # If a split node, append left and right children and depth to `stack`
+        # so we can loop through them
+        if is_split_node:
+            node = Node(node_id=node_id, n_samples=n_node_samples[node_id], conditions=conditions, is_leaf=False)
+            # nodes.append(node)
+            conditions_left = conditions.copy()
+            conditions_left.append(Condition(attribute_name=feature_names[feature[node_id]], threshold=threshold[node_id], greater=False))
+            conditions_right = conditions.copy()
+            conditions_right.append(Condition(attribute_name=feature_names[feature[node_id]], threshold=threshold[node_id], greater=True))
+            stack.append((children_left[node_id], depth + 1, conditions_left))
+            stack.append((children_right[node_id], depth + 1, conditions_right))
+        else:
+            node = Node(node_id=node_id, n_samples=n_node_samples[node_id], conditions=conditions, is_leaf=True)
+            nodes.append(node)
+            is_leaves[node_id] = True
+
+    return nodes
+
+def filter_data_for_conditions(all_data, conditions):
+    query_string = ""
+    for condition in conditions:
+        query_string += "`" + str(condition.attribute_name) + "`"
+        if condition.greater:
+            query_string += " > "
+        else:
+            query_string += " <= "
+        query_string += str(condition.threshold)
+        query_string += " & "
+    query_string = query_string.rsplit('&', 1)[0]
+    print("Query string: " + query_string)
+    if query_string == "":
+        pd_data_by_conditions = all_data.copy()
+    else:
+        pd_data_by_conditions = all_data.query(query_string)
+    return pd_data_by_conditions
+
+def calculate_surprisingness_index_better(row, target_feature_name, p_avg, affectedInstances):
+    return (abs(row[target_feature_name] - p_avg) ) * affectedInstances 
+
+def calculate_surprisingness_index_worse(row, target_feature_name, p_avg, vicinitySize, affectedInstances):
+    return (abs(row[target_feature_name] - p_avg) ) * (vicinitySize - affectedInstances)
+
+def calculate_relevance_worse(row, vicinitySize):
+    return row['surprisingnessWorseIndex'] * vicinitySize
+
+def calculate_relevance_better(row, vicinitySize):
+    return row['surprisingnessBetterIndex'] * vicinitySize
+
+def find_outliers_for_node_threshold(filtered_data, target_feature_name, conditions, descriptive_feature_names, clf, threshold):
+    mean_value = filtered_data[target_feature_name].mean()
+
+    lower_bound = mean_value - threshold
+    upper_bound = mean_value + threshold
+
+    filter_better = (filtered_data[target_feature_name] < lower_bound)
+    event_log_filter_better = filtered_data.loc[filter_better]
+    surprising_instances_better = []
+    if len(event_log_filter_better) > 0:
+        event_log_data_better = event_log_filter_better.values.tolist()
+        event_log_features_better = event_log_filter_better.columns.tolist()
+        for case in event_log_data_better:
+            case_feature_data = pd.DataFrame([case], columns=event_log_features_better)
+            descriptive_attributes = case_feature_data.filter(items=descriptive_feature_names)
+            descriptive_attributes_list = descriptive_attributes.values.tolist()
+            target_feature_index = event_log_features_better.index(target_feature_name)
+            leaf_id = clf.apply(descriptive_attributes_list)
+            instance = SurprisingInstance(case[0], case, target_feature_name, mean_value, case[target_feature_index], 0, False, conditions)
+            surprising_instances_better.append(instance)
+
+        other_instances_in_vicinity = filtered_data[~filtered_data.index.isin(event_log_filter_better.index)]
+        #print("All: " + str(len(filtered_data))+ " Better: " + str(len(event_log_filter_better)) + " Other: " + str(len(other_instances_in_vicinity)))
+        p_avg = other_instances_in_vicinity[target_feature_name].mean()
+        affectedInstances = len(event_log_filter_better)
+        vicinitySize = len(filtered_data)
+        event_log_filter_better['surprisingnessBetterIndex'] = event_log_filter_better.apply(lambda row: calculate_surprisingness_index_better(row=row, target_feature_name=target_feature_name, p_avg= p_avg, affectedInstances=affectedInstances), axis=1)
+        event_log_filter_better['RelevanceIndex'] = event_log_filter_better.apply(lambda row: calculate_relevance_better(row=row, vicinitySize=vicinitySize), axis=1)
+    print("There are " + str(len(event_log_filter_better)) + " better performing instances")
+
+    filter_worse = (filtered_data[target_feature_name] > upper_bound)
+    event_log_filter_worse = filtered_data.loc[filter_worse]
+    surprising_instances_worse = []
+    if len(event_log_filter_worse) > 0:
+        event_log_data_worse = event_log_filter_worse.values.tolist()
+        event_log_features_worse = event_log_filter_worse.columns.tolist()
+        for case in event_log_data_worse:
+            case_feature_data = pd.DataFrame([case], columns=event_log_features_worse)
+            descriptive_attributes = case_feature_data.filter(items=descriptive_feature_names)
+            descriptive_attributes_list = descriptive_attributes.values.tolist()
+            target_feature_index = event_log_features_worse.index(target_feature_name)
+            leaf_id = clf.apply(descriptive_attributes_list)
+            instance = SurprisingInstance(case[0], case, target_feature_name, mean_value, case[target_feature_index], leaf_id[0], False, conditions)
+            surprising_instances_worse.append(instance)
+        
+        other_instances_in_vicinity = filtered_data[~filtered_data.index.isin(event_log_filter_worse.index)]
+        #print("All: " + str(len(filtered_data))+ " Worse: " + str(len(event_log_filter_worse)) + " Other: " + str(len(other_instances_in_vicinity)))
+        #print("All: " + str(filtered_data[target_feature_name].mean())+ " Worse: " + str(event_log_filter_worse[target_feature_name].mean()) + " Other: " + str(other_instances_in_vicinity[target_feature_name].mean()))
+        p_avg = other_instances_in_vicinity[target_feature_name].mean()
+        affectedInstances = len(event_log_filter_worse)
+        vicinitySize = len(filtered_data)
+        event_log_filter_worse['surprisingnessWorseIndex'] = event_log_filter_worse.apply(lambda row: calculate_surprisingness_index_worse(row=row, target_feature_name=target_feature_name, p_avg= p_avg, vicinitySize=vicinitySize, affectedInstances=affectedInstances), axis=1)
+        event_log_filter_worse['RelevanceIndex'] = event_log_filter_worse.apply(lambda row: calculate_relevance_worse(row=row, vicinitySize=vicinitySize), axis=1)
+    print("There are " + str(len(event_log_filter_worse)) + " worse performing instances")
+
+    return event_log_filter_better, event_log_filter_worse, surprising_instances_better, surprising_instances_worse
+
+
+def find_outliers_for_node(filtered_data, target_feature_name, conditions, descriptive_feature_names, clf):
+    Q1 = filtered_data[target_feature_name].quantile(0.25)
+    Q3 = filtered_data[target_feature_name].quantile(0.75)
+    IQR = Q3 - Q1
+
+    mean_value = filtered_data[target_feature_name].mean()
+
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 *IQR
+
+    filter_better = (filtered_data[target_feature_name] < lower_bound)
+    event_log_filter_better = filtered_data.loc[filter_better]
+    surprising_instances_better = []
+    if len(event_log_filter_better) > 0:
+        event_log_data_better = event_log_filter_better.values.tolist()
+        event_log_features_better = event_log_filter_better.columns.tolist()
+        for case in event_log_data_better:
+            case_feature_data = pd.DataFrame([case], columns=event_log_features_better)
+            descriptive_attributes = case_feature_data.filter(items=descriptive_feature_names)
+            descriptive_attributes_list = descriptive_attributes.values.tolist()
+            target_feature_index = event_log_features_better.index(target_feature_name)
+            leaf_id = clf.apply(descriptive_attributes_list)
+            instance = SurprisingInstance(case[0], case, target_feature_name, mean_value, case[target_feature_index], 0, False, conditions)
+            surprising_instances_better.append(instance)
+
+        other_instances_in_vicinity = filtered_data[~filtered_data.index.isin(event_log_filter_better.index)]
+        #print("All: " + str(len(filtered_data))+ " Better: " + str(len(event_log_filter_better)) + " Other: " + str(len(other_instances_in_vicinity)))
+        p_avg = other_instances_in_vicinity[target_feature_name].mean()
+        affectedInstances = len(event_log_filter_better)
+        vicinitySize = len(filtered_data)
+        event_log_filter_better['surprisingnessBetterIndex'] = event_log_filter_better.apply(lambda row: calculate_surprisingness_index_better(row=row, target_feature_name=target_feature_name, p_avg= p_avg, affectedInstances=affectedInstances), axis=1)
+        event_log_filter_better['RelevanceIndex'] = event_log_filter_better.apply(lambda row: calculate_relevance_better(row=row, vicinitySize=vicinitySize), axis=1)
+    print("There are " + str(len(event_log_filter_better)) + " better performing instances")
+
+    filter_worse = (filtered_data[target_feature_name] > upper_bound)
+    event_log_filter_worse = filtered_data.loc[filter_worse]
+    surprising_instances_worse = []
+    if len(event_log_filter_worse) > 0:
+        event_log_data_worse = event_log_filter_worse.values.tolist()
+        event_log_features_worse = event_log_filter_worse.columns.tolist()
+        for case in event_log_data_worse:
+            case_feature_data = pd.DataFrame([case], columns=event_log_features_worse)
+            descriptive_attributes = case_feature_data.filter(items=descriptive_feature_names)
+            descriptive_attributes_list = descriptive_attributes.values.tolist()
+            target_feature_index = event_log_features_worse.index(target_feature_name)
+            leaf_id = clf.apply(descriptive_attributes_list)
+            instance = SurprisingInstance(case[0], case, target_feature_name, mean_value, case[target_feature_index], leaf_id[0], False, conditions)
+            surprising_instances_worse.append(instance)
+        
+        other_instances_in_vicinity = filtered_data[~filtered_data.index.isin(event_log_filter_worse.index)]
+        #print("All: " + str(len(filtered_data))+ " Worse: " + str(len(event_log_filter_worse)) + " Other: " + str(len(other_instances_in_vicinity)))
+        #print("All: " + str(filtered_data[target_feature_name].mean())+ " Worse: " + str(event_log_filter_worse[target_feature_name].mean()) + " Other: " + str(other_instances_in_vicinity[target_feature_name].mean()))
+        p_avg = other_instances_in_vicinity[target_feature_name].mean()
+        affectedInstances = len(event_log_filter_worse)
+        vicinitySize = len(filtered_data)
+        event_log_filter_worse['surprisingnessWorseIndex'] = event_log_filter_worse.apply(lambda row: calculate_surprisingness_index_worse(row=row, target_feature_name=target_feature_name, p_avg= p_avg, vicinitySize=vicinitySize, affectedInstances=affectedInstances), axis=1)
+        event_log_filter_worse['RelevanceIndex'] = event_log_filter_worse.apply(lambda row: calculate_relevance_worse(row=row, vicinitySize=vicinitySize), axis=1)
+    print("There are " + str(len(event_log_filter_worse)) + " worse performing instances")
+
+    return event_log_filter_better, event_log_filter_worse, surprising_instances_better, surprising_instances_worse
+
+
+def dt_regression(pd_data_event_log, descriptive_feature_names, target_feature_name, add_conditions, threshold, max_depth, detector_function, directory=None):
+    # Filter descriptive data
+    descriptive_attributes = pd_data_event_log.filter(items=descriptive_feature_names)
+    descriptive_feature_names = descriptive_attributes.columns.tolist()
+    descriptive_feature_data = descriptive_attributes.values.tolist()
+
+    # Filter target data
+    target_feature_name_list = []
+    target_feature_name_list.append(target_feature_name)
+    target_attributes = pd_data_event_log.filter(items=target_feature_name_list)
+    target_feature_name = target_attributes.columns.tolist()
+    target_feature_data = target_attributes.values.tolist()
+
+    np_target = np.array(target_feature_data)
+    unique, counts = np.unique(np_target, return_counts=True)
+    #print('Target Classes: ' + str(dict(zip(unique, counts))))
+
+    # Create DT Regressor
+    clf = tree.DecisionTreeRegressor(max_depth=max_depth, random_state=11)
+    
+    clf.fit(descriptive_feature_data, target_feature_data)
+   
+    nodes = traverse_tree(clf, descriptive_feature_names)
+
+    surprising_instances = {}
+    data_by_vicinity_id = {}
+
+    for node in nodes:
+        filtered_data = filter_data_for_conditions(pd_data_event_log, node.conditions)
+        data_by_vicinity_id[node.node_id] = filtered_data
+        if detector_function == 'boxplot':
+            better_performing_instances, worse_performing_instances, surprising_instances_better, surprising_instances_worse = find_outliers_for_node(filtered_data, target_feature_name[0], node.conditions, descriptive_feature_names, clf)
+        else:
+            better_performing_instances, worse_performing_instances, surprising_instances_better, surprising_instances_worse = find_outliers_for_node_threshold(filtered_data, target_feature_name[0], node.conditions, descriptive_feature_names, clf, threshold)
+        surprising_instances[node.node_id] = (node, better_performing_instances, worse_performing_instances, surprising_instances_better, surprising_instances_worse)
+
+    # Visualize DT
+    classes = []
+    for item in unique:
+        classes.append(str(item))
+        #print('Classes: ' + str(classes))
+    
+    # graphviz does not like special characters
+    new_feature_names = [] 
+    for feature_name in descriptive_feature_names:
+        feature_name = feature_name.replace('<', 'l')
+        feature_name = feature_name.replace('>', 'g')
+        new_feature_names.append(feature_name)
+    
+    gviz = dectree_visualizer.apply(clf, new_feature_names, classes)
+    if directory:
+        decision_tree_output_path = str(directory) + '/decision_tree.png'
+    else:
+        decision_tree_output_path = 'detection/static/detection/figures/decision_tree.png'
+    dectree_visualizer.save(gviz, decision_tree_output_path)
+
+    return surprising_instances, data_by_vicinity_id
+
+def find_conditions_for_instance(clf, attributes_list, descriptive_feature_names):
+    conditions = []
+    
+    feature = clf.tree_.feature
+    threshold = clf.tree_.threshold
+    decision_path = clf.decision_path(attributes_list)
+    leaf_id = clf.apply(attributes_list)
+
+    # Follow the decision path for the the surprising instance
+    sample_id = 0
+    node_index = decision_path.indices[decision_path.indptr[sample_id] : decision_path.indptr[sample_id + 1]]
+    for node_id in node_index:
+        # continue to the next node if it is a leaf node
+        if leaf_id[sample_id] == node_id:
+            continue
+
+        # check if value of the split feature for sample 0 is below threshold
+        if float(attributes_list[0][feature[node_id]]) <= float(threshold[node_id]):
+            threshold_sign = "<="
+            greater = False
+        else:
+            threshold_sign = ">"
+            greater = True
+        
+        condition = Condition(attribute_name=descriptive_feature_names[feature[node_id]], threshold=threshold[node_id], greater=greater)
+        conditions.append(condition)
+
+    return conditions
+
+def find_outliers_for_node_categorical(filtered_data, target_feature_name, conditions, descriptive_feature_names, clf):
+    expected_value = filtered_data[target_feature_name].value_counts().index.tolist()[0]
+    print('Expected value in vicinity: ' + str(expected_value))
+
+    filter_better = (filtered_data[target_feature_name] != expected_value)
+    event_log_filter_better = filtered_data.loc[filter_better]
+    surprising_instances_better = []
+    if len(event_log_filter_better) > 0:
+        event_log_data_better = event_log_filter_better.values.tolist()
+        event_log_features_better = event_log_filter_better.columns.tolist()
+        for case in event_log_data_better:
+            case_feature_data = pd.DataFrame([case], columns=event_log_features_better)
+            descriptive_attributes = case_feature_data.filter(items=descriptive_feature_names)
+            descriptive_attributes_list = descriptive_attributes.values.tolist()
+            target_feature_index = event_log_features_better.index(target_feature_name)
+            leaf_id = clf.apply(descriptive_attributes_list)
+            instance = SurprisingInstance(case[0], case, target_feature_name, expected_value, case[target_feature_index], leaf_id, True, conditions)
+            surprising_instances_better.append(instance)
+
+        other_instances_in_vicinity = filtered_data[~filtered_data.index.isin(event_log_filter_better.index)]
+        #print("All: " + str(len(filtered_data))+ " Better: " + str(len(event_log_filter_better)) + " Other: " + str(len(other_instances_in_vicinity)))
+    print("There are " + str(len(event_log_filter_better)) + " better performing instances")
+
+    event_log_filter_worse = None
+    surprising_instances_worse = []
+
+    return event_log_filter_better, event_log_filter_worse, surprising_instances_better, surprising_instances_worse
+
+def classify_dt(pd_data_event_log, descriptive_feature_names, target_feature_name, maxDepth, add_conditions):
+    # Filter descriptive data
+    descriptive_attributes = pd_data_event_log.filter(items=descriptive_feature_names)
+    descriptive_feature_names = descriptive_attributes.columns.tolist()
+    descriptive_feature_data = descriptive_attributes.values.tolist()
+
+    # Filter target data
+    target_feature_name_list = []
+    target_feature_name_list.append(target_feature_name)
+    target_attributes = pd_data_event_log.filter(items=target_feature_name_list)
+    target_feature_name = target_attributes.columns.tolist()
+    target_feature_data = target_attributes.values.tolist()
+
+    np_target = np.array(target_feature_data)
+    unique, counts = np.unique(np_target, return_counts=True)
+
+    clf = tree.DecisionTreeClassifier(max_depth=maxDepth, random_state=11)
+    clf.fit(descriptive_feature_data, target_feature_data)
+
+    nodes = traverse_tree(clf, descriptive_feature_names)
+
+    surprising_instances = {}
+    data_by_vicinity_id = {}
+
+    for node in nodes:
+        filtered_data = filter_data_for_conditions(pd_data_event_log, node.conditions)
+        data_by_vicinity_id[node.node_id] = filtered_data
+        better_performing_instances, worse_performing_instances, surprising_instances_better, surprising_instances_worse = find_outliers_for_node_categorical(filtered_data, target_feature_name[0], node.conditions, descriptive_feature_names, clf)
+        
+        surprising_instances[node.node_id] = (node, better_performing_instances, worse_performing_instances, surprising_instances_better, surprising_instances_worse)
+
+    # Visualize DT
+    classes = []
+    for item in unique:
+        classes.append(str(item))
+    
+    # graphviz does not like special characters
+    new_feature_names = [] 
+    for feature_name in descriptive_feature_names:
+        feature_name = feature_name.replace('<', 'l')
+        feature_name = feature_name.replace('>', 'g')
+        new_feature_names.append(feature_name)
+    
+    gviz = dectree_visualizer.apply(clf, new_feature_names, classes)
+    decision_tree_output_path = 'detection/static/detection/figures/decision_tree.png'
+    dectree_visualizer.save(gviz, decision_tree_output_path)
+
+    return surprising_instances, data_by_vicinity_id
+
+def detect_surprising_instances_algorithm(pd_data_event_log, descriptive_feature_names, target_feature_name, strategy, add_conditions, threshold, max_depth, detector_function, directory=None):
+    if strategy == 'numerical':
+        return dt_regression(pd_data_event_log, descriptive_feature_names, target_feature_name, add_conditions, threshold, max_depth, detector_function, directory)
+    elif strategy == 'categorical':
+        return classify_dt(pd_data_event_log, descriptive_feature_names, target_feature_name, max_depth, add_conditions)
+    else:
+        print('Undefined strategy')
+        return []
 
 def detect_surprising_instances(request, context):
-    log_path = request.session['log_path']
-    event_log = import_and_filter_event_log(request)
-    pd_data_event_log, feature_names = transform_log_to_feature_table(log_path, event_log)
+    target_feature, detector_function, model_threshold, model_strategy, situation_type = read_session_parameters(request)
 
-    # Feature extraction
-    target_feature = request.session['target_attribute']
+    pd_data_event_log, event_log, feature_list = transform_event_log_to_situations(request=request,situation_type=situation_type)
+
     decision_tree_max_depth = int(request.session['max_depth_decision_tree'])
-    feature_list = request.session['selected_feature_names'] # ['case:LoanGoal@Boat', 'case:LoanGoal@Business goal', 'case:LoanGoal@Car', 'case:LoanGoal@Caravan / Camper', 'case:LoanGoal@Debt restructuring', 'case:LoanGoal@Existing loan takeover', 'case:LoanGoal@Extra spending limit', 'case:LoanGoal@Home improvement', 'case:LoanGoal@Motorcycle', 'case:LoanGoal@Not speficied', 'case:LoanGoal@Other, see explanation', 'case:LoanGoal@Remaining debt home', 'case:LoanGoal@Tax payments', 'case:LoanGoal@Unknown', 'case:ApplicationType@New credit', 'case:RequestedAmount', '@@num_occurrence_O_Create Offer'] # extract_features(pd_data_event_log=pd_data_event_log, variant=variant, target_feature=target_feature, threshold=threshold)
-    print('Using ' + str(len(feature_list)) + ' features for vicinity Detection')
-    print(feature_list)
-
-    # Detect surprising instances
-    detector_function = request.session['detector_function']
-    model_threshold = None 
-    if detector_function == 'threshold':
-        model_threshold = int(request.session['target_attribute_threshold'])
-    print('Using Detector function ' + str(detector_function) + ' for surprising instance detection (threshold: ' + str(model_threshold) + ')')
-    
-    if request.session['target_attribute_type'] == 'categorical':
-        model_strategy = 'dt_classification'
-    else:
-        model_strategy = 'dt_regression'
+    print('Target: ' + str(target_feature))
     
     surprising_instances, data_by_vicinity_id = detect_surprising_instances_algorithm(pd_data_event_log=pd_data_event_log, descriptive_feature_names=feature_list, target_feature_name=target_feature, strategy=model_strategy, add_conditions=True, threshold=model_threshold, max_depth=decision_tree_max_depth, detector_function=detector_function)
     
-    context = filter_results_by_leaf_id(request, surprising_instances, context)
+    context = filter_results_by_vicinity_id(request, surprising_instances, context)
 
     surprising_instances_len = get_len_surprising_instances(surprising_instances)
-    #root_cause_analysis_dt(surprising_instances, request.session['selected_leaf_id'], pd_data_event_log, feature_names, target_feature)
 
     context['decision_tree_path'] = 'detection/figures/decision_tree.png'
     context['target_attribute_name'] = request.session['target_attribute']

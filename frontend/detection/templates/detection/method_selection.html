@@ -291,28 +291,134 @@ i.addEventListener('input', function () {
 </script>
 <script>
 let selectedSituationType = document.getElementById('situation_type');
-let situationActivityBlock = document.getElementById('div_situation_activity');
+let situationActivityBlock = document.getElementById('div_event_situation_activity')
+let eventFeaturesBlock = document.getElementById('div_event_features');
+let caseFeaturesBlock = document.getElementById('div_case_features');
+let eventTargetFeaturesBlock = document.getElementById('div_event_target_feature');
+let caseTargetFeaturesBlock = document.getElementById('div_case_target_feature');
 
+let selectedCaseTargetFeaturee = document.getElementById('target_attribute_case');
+let selectedEventTargetFeaturee = document.getElementById('target_attribute_event');
+let detectorFunctionBlockk = document.getElementById('div_detector_function');
+
+// use 'change' instead to see the difference in response
 selectedSituationType.addEventListener('change', function () {
     var selectedSituationTypeValue = selectedSituationType.value;
     console.log(selectedSituationTypeValue)
     if (selectedSituationTypeValue === "case") {
         situationActivityBlock.classList.add("hidden");
+        eventFeaturesBlock.classList.add("hidden");
+        eventTargetFeaturesBlock.classList.add("hidden");
+
+        caseFeaturesBlock.classList.remove("hidden");
+        caseTargetFeaturesBlock.classList.remove("hidden");
+
+        document.getElementById('similarity_graph_distance_function').forEach(opt => {
+            if (opt.value === "similarity_graph_distance_function_levenshtein") {
+                opt.disabled = false;
+            }
+        });
+
+        var selectedCaseTargetFeatureeValue = selectedCaseTargetFeaturee.value;
+        if (selectedCaseTargetFeatureeValue === "@@caseDuration") {
+            detectorFunctionBlockk.classList.remove("hidden");
+        }
+        else {
+            detectorFunctionBlockk.classList.add("hidden");
+        }
     }
     else {
         situationActivityBlock.classList.remove("hidden");
+        eventFeaturesBlock.classList.remove("hidden");
+        eventTargetFeaturesBlock.classList.remove("hidden");
+
+        caseFeaturesBlock.classList.add("hidden");
+        caseTargetFeaturesBlock.classList.add("hidden");
+        
+        document.getElementById('similarity_graph_distance_function').forEach(opt => {
+            if (opt.value === "similarity_graph_distance_function_levenshtein") {
+                opt.disabled = true;
+                opt.selected = false;
+            }
+        });
+
+        var selectedEventTargetFeatureeValue = selectedEventTargetFeaturee.value;
+        console.log(selectedEventTargetFeatureeValue)
+        if (selectedEventTargetFeatureeValue === "elapsed time") {
+            detectorFunctionBlockk.classList.remove("hidden");
+        }
+        else {
+            detectorFunctionBlockk.classList.add("hidden");
+        }
     }
 }, false);
 
 var selectedSituationTypeValue = selectedSituationType.value;
 if (selectedSituationTypeValue === "case") {
     situationActivityBlock.classList.add("hidden");
+    eventFeaturesBlock.classList.add("hidden");
+    eventTargetFeaturesBlock.classList.add("hidden");
+
+    caseFeaturesBlock.classList.remove("hidden");
+    caseTargetFeaturesBlock.classList.remove("hidden");
+}
+else {
+    situationActivityBlock.classList.remove("hidden");
+    eventFeaturesBlock.classList.remove("hidden");
+    eventTargetFeaturesBlock.classList.remove("hidden");
+
+    caseFeaturesBlock.classList.add("hidden");
+    caseTargetFeaturesBlock.classList.add("hidden");
+}
+</script>
+<script>
+let selectedCaseTargetFeature = document.getElementById('target_attribute_case');
+let selectedEventTargetFeature = document.getElementById('target_attribute_event');
+let detectorFunctionBlock = document.getElementById('div_detector_function');
+
+selectedCaseTargetFeature.addEventListener('change', function () {
+    var selectedCaseTargetFeatureValue = selectedCaseTargetFeature.value;
+    console.log(selectedCaseTargetFeatureValue)
+    if (selectedCaseTargetFeatureValue === "@@caseDuration") {
+        detectorFunctionBlock.classList.remove("hidden");
+    }
+    else {
+        detectorFunctionBlock.classList.add("hidden");
+    }
+}, false);
+
+var selectedCaseTargetFeatureValue = selectedCaseTargetFeature.value;
+if (selectedCaseTargetFeatureValue === "@@caseDuration") {
+    detectorFunctionBlock.classList.remove("hidden");
+}
+else {
+    detectorFunctionBlock.classList.add("hidden");
+}
+
+selectedEventTargetFeature.addEventListener('change', function () {
+    var selectedEventTargetFeatureValue = selectedEventTargetFeature.value;
+    console.log(selectedEventTargetFeatureValue)
+    if (selectedEventTargetFeatureValue === "elapsed time") {
+        detectorFunctionBlock.classList.remove("hidden");
+    }
+    else {
+        detectorFunctionBlock.classList.add("hidden");
+    }
+}, false);
+
+var selectedEventTargetFeatureValue = selectedEventTargetFeature.value;
+if (selectedEventTargetFeatureValue === "elapsed time") {
+    detectorFunctionBlock.classList.remove("hidden");
+}
+else {
+    detectorFunctionBlock.classList.add("hidden");
 }
 </script>
 <script>
 let selectedDetectorFunction = document.getElementById('detector_function');
 let situationNumericalThresholdBlock = document.getElementById('div_numerical_threshold');
 
+// use 'change' instead to see the difference in response
 selectedDetectorFunction.addEventListener('change', function () {
     var selectedDetectorFunctionValue = selectedDetectorFunction.value;
     console.log(selectedDetectorFunctionValue)
@@ -329,6 +435,4 @@ if (selectedDetectorFunctionValue === "boxplot") {
     situationNumericalThresholdBlock.classList.add("hidden");
 }
 </script>
-
-
 {% endblock javascripts %}

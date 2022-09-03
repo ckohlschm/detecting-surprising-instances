@@ -123,7 +123,7 @@
     <div class="col-12 col-sm-12 col-xl-6">
         <div class="card border-0 shadow mb-4">
             <div class="card-body">
-                <h2 class="h6 text-gray-400 mb-0">Surprising instances per node:</h2>
+                <h2 class="h6 text-gray-400 mb-0">Surprising instances per vicinity:</h2>
                 <div class="ct-bar-chart-leaf-ids"></div>
             </div>
         </div>
@@ -283,6 +283,17 @@
                     </div>
                 </div>
                 {% endif %}
+                <div class="d-flex ms-auto">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label>Vicinity ID:</label>
+                        <select class="leaf_select" id="leaf_select" name="leaf_select" onchange="this.form.submit()" aria-label="Currently selected vicinity id">
+                            {% for leaf_id in leaf_ids %}
+                            <option name="leaf_id{{ leaf_id }}" value="{{ leaf_id }}" {% if leaf_id == selected_leaf_id %} selected {% endif %} >{{ leaf_id }}</option>
+                            {% endfor %} 
+                        </select>
+                    </form>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-wrapper table-responsive">
@@ -292,7 +303,6 @@
                                 <th>ID</th>
                                 <th>Predicted value</th>
                                 <th>Actual value</th>
-                                <th>Leaf ID</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -301,7 +311,6 @@
                                     <td>{{ surprising_instance.id }}</td>
                                     <td>{{ surprising_instance.actual_data }}</td>
                                     <td>{{ surprising_instance.target_data }}</td>
-                                    <td><span class="text-danger fw-bold"> {{ surprising_instance.leaf_id }} </span></td>
                                 </tr>
                             {% endfor %} 
                         </tbody>

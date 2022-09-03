@@ -8,26 +8,19 @@
 <form method="POST">
     {% csrf_token %}
     <div>
-        <div class="fs-5 fw-normal mb-2">Target Feature</div>
-        <!-- <div class="mb-4">
+        <div class="mb-4">
             <label class="my-1 me-2" for="situation_type">Type of situation:</label>
             <select class="form-select" id="situation_type" name="situation_type"  aria-label="Type of situation">
                 <option name="case" value="case" {% if situation_type == 'case' %} selected {% endif %}>Case situation</option>
                 <option name="event" value="event" {% if situation_type == 'event' %} selected {% endif %}>Event situation</option>
             </select>
         </div>
-        <div class="mb-4" id="div_situation_activity">
+        <div class="mb-4" id="div_event_situation_activity">
             <label class="my-1 me-2" for="selected_activity">Activity:</label>
             <select class="form-select" id="selected_activity" name="selected_activity"  aria-label="Activity">
                 {% for activity_name in activity_names %}
                 <option name="{{activity_name}}" value="{{activity_name}}" {% if activity_name == selected_activity %} selected {% endif %}>{{activity_name}}</option>
                 {% endfor %} 
-            </select>
-        </div> -->
-        <div class="mb-4">
-            <label class="my-1 me-2" for="target_attribute_case">Target Feature name:</label>
-            <select class="form-select" id="target_attribute_case" name="target_attribute_case"  aria-label="Target attribute">
-                <option name="@@caseDuration" value="@@caseDuration" {% if '@@caseDuration' == target_attribute %} selected {% endif %}>Case Duration</option> 
             </select>
         </div>
     </div>
@@ -43,30 +36,66 @@
             <label class="my-1 me-2" for="k_means_number_clusters">Number of clusters:</label>
             <input type="number" id="k_means_number_clusters" name="k_means_number_clusters" min="2" max="100" value="{{ k_means_number_clusters }}">
         </div>
-        <div class="mb-4">
-            <label class="my-1 me-2" for="descriptive_attributes">Descriptive Features:</label>
-            <select class="form-select" id="descriptive_attributes" name="descriptive_attributes" style="resize: vertical" aria-label="Descriptive attributes" multiple>
-                {% for feature in feature_names %}
-                <option name="{{ feature }}" value="{{ feature }}" {% if feature in selected_features %} selected {% endif %}>{{ feature }}</option>
-                {% endfor %} 
-            </select>
+        <div>
+            <div class="mb-4" id="div_case_features">
+                <label class="my-1 me-2" for="descriptive_attributes">Descriptive Features:</label>
+                <select class="form-select" id="descriptive_attributes" name="descriptive_attributes" style="resize: vertical" aria-label="Descriptive attributes" multiple>
+                    {% for feature in feature_names %}
+                    <option name="{{ feature }}" value="{{ feature }}" {% if feature in selected_feature_names %} selected {% endif %}>{{ feature }}</option>
+                    {% endfor %} 
+                </select>
+            </div>
+            <div class="mb-4" id="div_event_features">
+                <label class="my-1 me-2" for="event_features">Descriptive Features:</label>
+                <select class="form-select" id="event_features" name="event_features" style="resize: vertical" aria-label="Descriptive attributes" multiple>
+                    {% for feature in event_attribute_names %}
+                    <option name="{{ feature }}" value="{{ feature }}">{{ feature }}</option>
+                    {% endfor %} 
+                </select>
+            </div>
+            <!-- <div class="mb-4" id="div_situation_activity_names">
+                <label class="my-1 me-2" for="situation_activities">Interesting activities:</label>
+                <select class="form-select" id="situation_activities" name="situation_activities" style="resize: vertical" aria-label="Activity" multiple>
+                    {% for activity_name in activity_names %}
+                    <option name="{{activity_name}}" value="{{activity_name}}">{{activity_name}}</option>
+                    {% endfor %} 
+                </select>
+            </div> -->
         </div>
-    </div>
+    </div>    
     <div>
         <div class="fs-5 fw-normal mb-2">Surprising Instance Detection</div>
-        <div class="mb-4">
-            <label class="my-1 me-2" for="detector_function">Detector function:</label>
-            <select class="form-select" id="detector_function" name="detector_function"  aria-label="Detector function">
-                <option name="boxplot" value="boxplot" {% if detector_function == 'boxplot' %} selected {% endif %}>Boxplot</option>
-                <option name="threshold" value="threshold" {% if detector_function == 'threshold' %} selected {% endif %}>Threshold</option>
-            </select>
+        <div class="mb-4" id="case_level_target_features">
+            <label class="my-1 me-2" for="target_attribute">Target Feature name:</label>
+            <div class="mb-4" id="div_event_target_feature">
+                <select class="form-select" id="target_attribute_event" name="target_attribute_event"  aria-label="Target attribute">
+                    <option name="elapsed time" value="elapsed time" {% if 'elapsed_time' == target_attribute %} selected {% endif %}>Elapsed Time</option> 
+                    <option name="next activity" value="next activity" {% if 'next_activity' == target_attribute %} selected {% endif %}>Next Activity</option>
+                    <option name="previous activity" value="previous activity" {% if 'previous_activity' == target_attribute %} selected {% endif %}>Previous Activity</option> 
+                </select>
+            </div>
+            <div class="mb-4" id="div_case_target_feature">
+                <select class="form-select" id="target_attribute_case" name="target_attribute_case"  aria-label="Target attribute">
+                    <option name="@@caseDuration" value="@@caseDuration" {% if '@@caseDuration' == target_attribute %} selected {% endif %}>Case Duration</option> 
+                    <option name="@@delay" value="@@delay" {% if '@@delay' == target_attribute %} selected {% endif %}>Delay</option>
+                </select>
+            </div>
         </div>
-        <div class="mb-4" id="div_numerical_threshold">
-            <label class="my-1 me-2" for="target_attribute_threshold">Numerical Threshold:</label>
-            <input type="range" id="target_attribute_threshold" name="target_attribute_threshold" min="1" max="8550000" value="{{ target_attribute_threshold }}">
-            <label id="caseDuration">2 days</label>
+        <div id="div_detector_function">
+            <div class="mb-4">
+                <label class="my-1 me-2" for="detector_function">Detector function:</label>
+                <select class="form-select" id="detector_function" name="detector_function"  aria-label="Detector function">
+                    <option name="boxplot" value="boxplot" {% if detector_function == 'boxplot' %} selected {% endif %}>Boxplot</option>
+                    <option name="threshold" value="threshold" {% if detector_function == 'threshold' %} selected {% endif %}>Threshold</option>
+                </select>
+            </div>
+            <div class="mb-4" id="div_numerical_threshold">
+                <label class="my-1 me-2" for="target_attribute_threshold">Numerical Threshold:</label>
+                <input type="range" id="target_attribute_threshold" name="target_attribute_threshold" min="1" max="8550000" value="{{ target_attribute_threshold }}">
+                <label id="caseDuration">2 days</label>
+            </div>
         </div>
-    </div>
+    </div>  
     <div class="d-flex">
         <button type="submit" id="submit_parameters_random_walk" name="submit_parameters_random_walk" class="btn btn-primary">Submit Parameters</button>
     </div>

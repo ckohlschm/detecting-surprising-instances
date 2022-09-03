@@ -63,6 +63,9 @@ def check_for_post_requests(request, context):
             # Event feature names
             event_attributes = get_all_event_attributes_from_log(event_log)
             event_attributes = list(event_attributes)
+            event_attributes.append('elapsed time')
+            event_attributes.append('previous activity')
+            event_attributes.append('next activity')
             print('Event attributes: ' + str(event_attributes))
             context['event_attribute_names'] = event_attributes
             request.session['event_attribute_names'] = event_attributes
@@ -85,6 +88,7 @@ def check_for_post_requests(request, context):
             context['variantsdatapiechart'] = request.session['variantsdatapiechart']
             context['selected_variants'] = request.session['selected_variants']
             context['feature_names'] = request.session['feature_names']
+            context['event_attribute_names'] = request.session['event_attribute_names']
             context['activity_names'] = request.session['activity_names']
             context['all_attribute_names'] = request.session['all_attribute_names']
             context['model_name'] = request.session['model_name']
@@ -103,7 +107,7 @@ def select_parameters_for_method(request, context):
     context['target_attribute_threshold'] = request.session.get('target_attribute_threshold', 1000000)
     context['max_depth_decision_tree'] = request.session.get('max_depth_decision_tree', 3)
     context['similarity_graph_distance_function'] = request.session.get('similarity_graph_distance_function', 'similarity_graph_distance_function_levenshtein')
-    context['similarity_graph_distance_function'] = request.session.get('similarity_graph_distance_max', 2)
+    #context['similarity_graph_distance_function'] = request.session.get('similarity_graph_distance_max', 2)
     context['similarity_graph_distance_max'] = request.session.get('similarity_graph_distance_max', 1)
     context['k_means_number_clusters'] = request.session.get('k_means_number_clusters', 3)
 
