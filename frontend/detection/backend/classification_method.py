@@ -3,9 +3,7 @@ import pandas as pd
 from sklearn import tree
 from pm4py.visualization.decisiontree import visualizer as dectree_visualizer
 
-from .data_reader import transform_log_to_feature_table
-from .root_cause_analysis import find_cause_for_instance
-from .detection_util import calculate_surprising_instance_statistics, filter_results_by_vicinity_id, import_and_filter_event_log, get_len_surprising_instances, read_session_parameters, transform_event_log_to_situations
+from .detection_util import calculate_surprising_instance_statistics, filter_results_by_vicinity_id, get_len_surprising_instances, read_session_parameters, transform_event_log_to_situations
 from .models import SurprisingInstance, Condition, Node
 
 
@@ -18,32 +16,6 @@ def apply_supervised_learning(request, context):
     context, event_log, surprising_instances_len = detect_surprising_instances(request, context)
     context = calculate_surprising_instance_statistics(event_log, surprising_instances_len, context)
     return context
-
-def label_surprising_better(row, surprising_instances):
-    for instance in surprising_instances:
-        if row['@@case_id_column'] == instance.id:
-            if instance.actual_data < instance.target_data:
-                return True
-    return False
-
-def label_surprising_worse(row, surprising_instances):
-    for instance in surprising_instances:
-        if row['@@case_id_column'] == instance.id:
-            if instance.actual_data > instance.target_data:
-                return True
-    return False
-
-def root_cause_analysis_dt(surprising_instances, selected_leaf_id, pd_data_event_log, descriptive_feature_names, target_feature_name):
-    pd_data_event_log['@@surprising_better'] = pd_data_event_log.apply (lambda row: label_surprising_better(row, surprising_instances), axis=1)
-    pd_data_event_log['@@surprising_worse'] = pd_data_event_log.apply (lambda row: label_surprising_worse(row, surprising_instances), axis=1) 
-    
-    # Root cause analysis
-    for instance in surprising_instances:
-        if str(instance.leaf_id) == str(selected_leaf_id):
-            print("Conditions: " + str(instance.conditions))
-            find_cause_for_instance(pd_data_event_log, instance, ['@@surprising_better'], 'dt_rca_better')
-            find_cause_for_instance(pd_data_event_log, instance, ['@@surprising_worse'], 'dt_rca_worse')
-            break
 
 def traverse_tree(clf, feature_names):
     nodes = []
@@ -424,7 +396,10 @@ def detect_surprising_instances(request, context):
     context['target_attribute_name'] = request.session['target_attribute']
     context['decision_tree_path_rca_better'] = 'detection/figures/dt_rca_better.png'
     context['decision_tree_path_rca_worse'] = 'detection/figures/dt_rca_worse.png'
+    if model_strategy == 'categorical':
+        context['categorical'] = True
+    else:
+        context['categorical'] = False
     selected_leaf_id = request.session['selected_leaf_id']
-
     request.session['instances_in_vicinity'] = data_by_vicinity_id[selected_leaf_id].to_json(orient='split')
     return context, event_log, surprising_instances_len

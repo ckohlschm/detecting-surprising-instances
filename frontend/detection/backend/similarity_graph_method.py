@@ -152,6 +152,10 @@ def detect_surprising_instances(request, context):
     request.session['instances_in_vicinity'] = data_by_vicinity_id[selected_leaf_id].to_json(orient='split')
 
     context['target_attribute_name'] = request.session['target_attribute']
+    if model_strategy == 'categorical':
+        context['categorical'] = True
+    else:
+        context['categorical'] = False
 
     return context, event_log, surprising_instances_len
 

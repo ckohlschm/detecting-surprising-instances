@@ -30,6 +30,10 @@ def detect_surprising_instances(request, context):
     surprising_instances_len = get_len_surprising_instances(surprising_instances)
 
     context['target_attribute_name'] = request.session['target_attribute']
+    if model_strategy == 'categorical':
+        context['categorical'] = True
+    else:
+        context['categorical'] = False
     selected_leaf_id = request.session['selected_leaf_id']
     context['selected_leaf_id'] = selected_leaf_id
 
