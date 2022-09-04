@@ -142,7 +142,7 @@
     </div>
 </div>
 
-{% if not surprising_instances.0.categorical %}
+{% if not categorical %}
 <div class="row">
     <div class="col-12 col-sm-12 col-xl-6">
         <div class="card border-0 shadow mb-4">
@@ -185,7 +185,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Predicted value</th>
+                            <th>Expected value</th>
                             <th>Actual value</th>
                             <th>Difference</th>
                         </tr>
@@ -254,7 +254,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Predicted value</th>
+                            <th>Expected value</th>
                             <th>Actual value</th>
                             <th>Difference</th>
                         </tr>
@@ -284,7 +284,7 @@
 </div>
 {% endif %}
 
-{% if surprising_instances.0.categorical %}
+{% if categorical %}
 <div class="row">
     <div class="col-12 col-sm-12 col-xl-12">
         <div class="card border-0 shadow mb-4">
@@ -323,7 +323,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Predicted value</th>
+                                <th>Expected value</th>
                                 <th>Actual value</th>
                             </tr>
                         </thead>
