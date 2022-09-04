@@ -1,0 +1,15 @@
+__pycache__/
+.github/
+.pytest_cache/
+.vscode/
+.idea/
+env/
+.gitignore
+test-data/
+frontend/detection/backend/event_logs/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
