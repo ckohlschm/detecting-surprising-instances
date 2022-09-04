@@ -34,7 +34,7 @@
         </div>
         <div class="mb-4">
             <label class="my-1 me-2" for="k_means_number_clusters">Number of clusters:</label>
-            <input type="number" id="k_means_number_clusters" name="k_means_number_clusters" min="2" max="100" value="{{ k_means_number_clusters }}">
+            <input type="number" id="k_means_number_clusters" name="k_means_number_clusters" min="1" value="{{ k_means_number_clusters }}">
         </div>
         <div>
             <div class="mb-4" id="div_case_features">
@@ -91,7 +91,7 @@
             </div>
             <div class="mb-4" id="div_numerical_threshold">
                 <label class="my-1 me-2" for="target_attribute_threshold">Numerical Threshold:</label>
-                <input type="range" id="target_attribute_threshold" name="target_attribute_threshold" min="1" max="8550000" value="{{ target_attribute_threshold }}">
+                <input type="range" id="target_attribute_threshold" name="target_attribute_threshold" min="0" max="{{max_case_duration_seconds}}" value="{{ target_attribute_threshold }}">
                 <label id="caseDuration">2 days</label>
             </div>
         </div>

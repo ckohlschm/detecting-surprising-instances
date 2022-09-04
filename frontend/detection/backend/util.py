@@ -47,8 +47,9 @@ def check_for_post_requests(request, context):
             request.session['feature_names'] = feature_names
             context['feature_names'] = feature_names
             # Case duration
-            context, avg_case_duration = calculate_log_statistics(context, event_log)
+            context, avg_case_duration, max_case_duration_seconds = calculate_log_statistics(context, event_log)
             request.session['avg_case_duration'] = avg_case_duration
+            request.session['max_case_duration_seconds'] = max_case_duration_seconds
             # Activity names
             activity_names = get_attribute_values(event_log, 'concept:name')
             request.session['activity_names'] = activity_names
@@ -94,6 +95,7 @@ def check_for_post_requests(request, context):
             context['model_name'] = request.session['model_name']
             context['model_path'] = request.session['model_path']
             context['avg_case_duration'] = request.session['avg_case_duration']
+            context['max_case_duration_seconds'] = request.session['max_case_duration_seconds']
             context = parse_situation_feature_data(request, context)
 
     context = select_parameters_for_method(request, context)
@@ -132,8 +134,9 @@ def filter_event_data_and_discover_model(request, context):
     feature_names.remove('@@case_id_column')
     context['feature_names'] = feature_names
     # Case duration
-    context, avg_case_duration = calculate_log_statistics(context, filtered_log)
+    context, avg_case_duration, max_case_duration_seconds = calculate_log_statistics(context, filtered_log)
     request.session['avg_case_duration'] = avg_case_duration
+    request.session['max_case_duration_seconds'] = max_case_duration_seconds
     # Discover Process Model
     context = discover_model(request, context, log_path, filtered_log)
     # Parse previously extracted features into table
@@ -266,12 +269,18 @@ def discover_model(request, context, log_path, event_log=None):
 
 def calculate_log_statistics(context, event_log):
     all_case_durations = case_statistics.get_all_casedurations(event_log)
-    avg_variant_case_duration = mean(all_case_durations)
-    avg_variant_case_duration = round(avg_variant_case_duration, 0)
-    duration = datetime.timedelta(seconds=avg_variant_case_duration)
-    avg_case_duration = str(duration)
+
+    avg_case_duration = mean(all_case_durations)
+    avg_case_duration = round(avg_case_duration, 0)
+    avg_case_duration = datetime.timedelta(seconds=avg_case_duration)
+    avg_case_duration = str(avg_case_duration)
     context['avg_case_duration'] = avg_case_duration
-    return context, avg_case_duration
+
+    max_case_duration_seconds = max(all_case_durations)
+    max_case_duration_seconds = round(max_case_duration_seconds, 0)
+    context['max_case_duration_seconds'] = max_case_duration_seconds
+
+    return context, avg_case_duration, max_case_duration_seconds
 
 def parse_situation_feature_data(request, context):
     # convert log to features
