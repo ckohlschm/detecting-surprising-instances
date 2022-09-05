@@ -66,7 +66,7 @@ You can then access the application via localhost:<port> in your browser.
 
 *Run the application using the Docker image*:
 ```
-docker run -p 33333:33333 ghcr.io/ckohlschm/detecting-surprising-instances:1.0.0
+docker run -p 33333:33333 ghcr.io/ckohlschm/detecting-surprising-instances:1.1.0
 ```
 
 You can then access the application via localhost:33333 in your browser.
