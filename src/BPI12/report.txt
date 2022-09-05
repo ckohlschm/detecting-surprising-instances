@@ -1,0 +1,582 @@
+Number of situations:                   13087 cases
+Features in event log:            75
+
+=====================Boxplots=====================
+Found a total of 329 surprising instances
+IQR: 1226598.715999961 - lb: -4.0 weeks, 6.0 days, 16.0 hours, 55.0 minutes, 56.0 seconds - ub: 5.0 weeks, 11.0 hours, 49.0 minutes, 11.0 seconds - Q1: 54.0 seconds - Q3: 2.0 weeks, 4.0 hours, 44.0 minutes, 13.0 seconds
+Better performing instances: 0
+Worse performing instances: 329
+=====================Decision Tree=====================
+Found a total of 1804 surprising instances
+Better performing instances: 29
+Worse performing instances: 1775
+Node: [46]- 100: [event:org:resource@11180 > 0.5, event:org:resource@11181 > 0.5, event:org:resource@10909 > 0.5, case:AMOUNT_REQ > 10750.0]
+Better performing instances: 3
+Effectiveness: 37155700902.48435
+Surprisingness: 28397.844513882872
+Worse performing instances: 10
+Effectiveness: 33043333.15022204
+Surprisingness: 33043.43215022203
+Node: [45]- 101: [event:org:resource@11180 > 0.5, event:org:resource@11181 > 0.5, event:org:resource@10909 > 0.5, case:AMOUNT_REQ <= 10750.0]
+Better performing instances: 1
+Effectiveness: 35482992894.606384
+Surprisingness: 27115.24203077921
+Worse performing instances: 10
+Effectiveness: 26051400.009637035
+Surprisingness: 26051.498029439015
+Node: [43]- 151: [event:org:resource@11180 > 0.5, event:org:resource@11181 > 0.5, event:org:resource@10909 <= 0.5, event:org:resource@11201 > 0.5]
+Better performing instances: 13
+Effectiveness: 26435279569.41782
+Surprisingness: 20219.818725300254
+Worse performing instances: 14
+Effectiveness: 38255300.002007015
+Surprisingness: 27325.306075227338
+Node: [42]- 113: [event:org:resource@11180 > 0.5, event:org:resource@11181 > 0.5, event:org:resource@10909 <= 0.5, event:org:resource@11201 <= 0.5, case:AMOUNT_REQ > 9850.0]
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 9699355.088036304
+Surprisingness: 32331.209909973524
+Node: [41]- 102: [event:org:resource@11180 > 0.5, event:org:resource@11181 > 0.5, event:org:resource@10909 <= 0.5, event:org:resource@11201 <= 0.5, case:AMOUNT_REQ <= 9850.0]
+Better performing instances: 0
+Worse performing instances: 1
+Effectiveness: 3067108.8751584752
+Surprisingness: 30671.098457467106
+Node: [37]- 100: [event:org:resource@11180 > 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10909 > 0.5, event:org:resource@11203 > 0.5]
+Better performing instances: 12
+Effectiveness: 28493343532.856693
+Surprisingness: 21792.350947500334
+Worse performing instances: 12
+Effectiveness: 30910388.62640916
+Surprisingness: 25758.775988674304
+Node: [36]- 154: [event:org:resource@11180 > 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10909 > 0.5, event:org:resource@11203 <= 0.5]
+Better performing instances: 0
+Worse performing instances: 6
+Effectiveness: 17688826.782810364
+Surprisingness: 29481.41654277919
+Node: [34]- 106: [event:org:resource@11180 > 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10909 <= 0.5, event:org:resource@10861 > 0.5, case:AMOUNT_REQ > 14021.0]
+Better performing instances: 0
+Worse performing instances: 4
+Effectiveness: 12689779.901353018
+Surprisingness: 31724.48711187311
+Node: [33]- 105: [event:org:resource@11180 > 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10909 <= 0.5, event:org:resource@10861 > 0.5, case:AMOUNT_REQ <= 14021.0]
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 11371757.264176503
+Surprisingness: 37905.885832969296
+Node: [31]- 123: [event:org:resource@11180 > 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10909 <= 0.5, event:org:resource@10861 <= 0.5, event:org:resource@11119 > 0.5]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [30]- 423: [event:org:resource@11180 > 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10909 <= 0.5, event:org:resource@10861 <= 0.5, event:org:resource@11119 <= 0.5]
+Better performing instances: 0
+Worse performing instances: 3
+Effectiveness: 11585091.287521645
+Surprisingness: 38616.97797968208
+Node: [25]- 106: [event:org:resource@11180 <= 0.5, event:org:resource@11181 > 0.5, event:org:resource@10861 > 0.5, event:org:resource@11203 > 0.5]
+Better performing instances: 0
+Worse performing instances: 9
+Effectiveness: 36474768.21377298
+Surprisingness: 40527.604294129305
+Node: [24]- 102: [event:org:resource@11180 <= 0.5, event:org:resource@11181 > 0.5, event:org:resource@10861 > 0.5, event:org:resource@11203 <= 0.5, case:AMOUNT_REQ > 11500.0]
+Better performing instances: 0
+Worse performing instances: 7
+Effectiveness: 25613457.791536685
+Surprisingness: 36590.721929086016
+Node: [23]- 104: [event:org:resource@11180 <= 0.5, event:org:resource@11181 > 0.5, event:org:resource@10861 > 0.5, event:org:resource@11203 <= 0.5, case:AMOUNT_REQ <= 11500.0]
+Better performing instances: 0
+Worse performing instances: 4
+Effectiveness: 16661211.737839919
+Surprisingness: 41653.06742152287
+Node: [20]- 180: [event:org:resource@11180 <= 0.5, event:org:resource@11181 > 0.5, event:org:resource@10861 <= 0.5, event:org:resource@10909 > 0.5]
+Better performing instances: 0
+Worse performing instances: 1
+Effectiveness: 4658889.33860331
+Surprisingness: 46588.8988860331
+Node: [19]- 161: [event:org:resource@11180 <= 0.5, event:org:resource@11181 > 0.5, event:org:resource@10861 <= 0.5, event:org:resource@10909 <= 0.5, event:org:resource@10913 > 0.5]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [18]- 516: [event:org:resource@11180 <= 0.5, event:org:resource@11181 > 0.5, event:org:resource@10861 <= 0.5, event:org:resource@10909 <= 0.5, event:org:resource@10913 <= 0.5]
+Better performing instances: 0
+Worse performing instances: 5
+Effectiveness: 14345100.268047238
+Surprisingness: 28690.21012911773
+Node: [14]- 179: [event:org:resource@11180 <= 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10861 > 0.5, event:org:resource@10913 > 0.5]
+Better performing instances: 0
+Worse performing instances: 2
+Effectiveness: 6025965.299350201
+Surprisingness: 30129.837558203522
+Node: [13]- 125: [event:org:resource@11180 <= 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10861 > 0.5, event:org:resource@10913 <= 0.5, event:org:resource@10909 > 0.5]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [12]- 625: [event:org:resource@11180 <= 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10861 > 0.5, event:org:resource@10913 <= 0.5, event:org:resource@10909 <= 0.5]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [9]- 130: [event:org:resource@11180 <= 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10861 <= 0.5, event:org:resource@11049 > 0.5, event:org:resource@10913 > 0.5]
+Better performing instances: 0
+Worse performing instances: 9
+Effectiveness: 18713734.85183443
+Surprisingness: 20793.10726272202
+Node: [8]- 500: [event:org:resource@11180 <= 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10861 <= 0.5, event:org:resource@11049 > 0.5, event:org:resource@10913 <= 0.5]
+Better performing instances: 0
+Worse performing instances: 26
+Effectiveness: 50579550.04296598
+Surprisingness: 19453.724573448453
+Node: [6]- 540: [event:org:resource@11180 <= 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10861 <= 0.5, event:org:resource@11049 <= 0.5, event:org:resource@11203 > 0.5]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [5]- 8241: [event:org:resource@11180 <= 0.5, event:org:resource@11181 <= 0.5, event:org:resource@10861 <= 0.5, event:org:resource@11049 <= 0.5, event:org:resource@11203 <= 0.5]
+Better performing instances: 0
+Worse performing instances: 1646
+Effectiveness: 1881854062.8914757
+Surprisingness: 11433.089976850664
+=====================K-Means=====================
+Found a total of 1492 surprising instances
+Better performing instances:      50
+Worse performing instances:       1442
+ID: 1
+Better performing instances: 0
+Effectiveness: 24903787.61556319
+Surprisingness: 31129.776424215892
+ID: 2
+Better performing instances: 0
+Effectiveness: 14546100.791556632
+Surprisingness: 24243.52390481239
+ID: 3
+Better performing instances: 0
+Effectiveness: 10232699.238340883
+Surprisingness: 25581.757136948097
+ID: 4
+Better performing instances: 16
+Effectiveness: 484803674.159131
+Surprisingness: 21451.55546158665
+Effectiveness: 61677222.13472462
+Surprisingness: 25698.940737953442
+ID: 5
+Better performing instances: 0
+Effectiveness: 3220780.206336365
+Surprisingness: 32207.804437464372
+ID: 6
+Better performing instances: 0
+ID: 7
+Better performing instances: 17
+Effectiveness: 459522774.56177026
+Surprisingness: 21274.274757767536
+Effectiveness: 48083486.05361134
+Surprisingness: 28284.4757927075
+ID: 8
+Better performing instances: 0
+Effectiveness: 6171377.0373396445
+Surprisingness: 30856.89155325771
+ID: 9
+Better performing instances: 0
+Effectiveness: 12081586.636457633
+Surprisingness: 24163.18977291527
+ID: 10
+Better performing instances: 0
+Effectiveness: 19257619.569219984
+Surprisingness: 16048.051351931115
+ID: 11
+Better performing instances: 0
+Effectiveness: 328947453.79397386
+Surprisingness: 2969.0362403410113
+ID: 12
+Better performing instances: 0
+Effectiveness: 17076543.514286045
+Surprisingness: 28460.921325893407
+ID: 13
+Better performing instances: 0
+Effectiveness: 18254407.896236736
+Surprisingness: 60848.03917793198
+ID: 14
+Better performing instances: 0
+Effectiveness: 22404736.626325846
+Surprisingness: 22404.773566624353
+ID: 15
+Better performing instances: 0
+Effectiveness: 31520961.468244124
+Surprisingness: 21014.020430175173
+ID: 16
+Better performing instances: 17
+Effectiveness: 435522285.93882525
+Surprisingness: 22683.53291896294
+Effectiveness: 47327728.628382646
+Surprisingness: 29579.90618221284
+ID: 17
+Better performing instances: 0
+Effectiveness: 25742550.72433456
+Surprisingness: 28602.85875140918
+ID: 18
+Better performing instances: 0
+Effectiveness: 26734539.176731054
+Surprisingness: 20565.062635946964
+ID: 19
+Better performing instances: 0
+Effectiveness: 38966314.89744074
+Surprisingness: 38966.35969382083
+ID: 20
+Better performing instances: 0
+Effectiveness: 59719230.946641505
+Surprisingness: 11059.264114697926
+ID: 21
+Better performing instances: 0
+Effectiveness: 108150725.23070696
+Surprisingness: 12151.985515090446
+ID: 22
+Better performing instances: 0
+Effectiveness: 7862080.909207898
+Surprisingness: 39310.41056427657
+ID: 23
+Better performing instances: 0
+Effectiveness: 5736597.20432482
+Surprisingness: 28682.99441145461
+ID: 24
+Better performing instances: 0
+Effectiveness: 30765876.981238957
+Surprisingness: 23666.105017049405
+ID: 25
+Better performing instances: 0
+Effectiveness: 26818483.217016377
+Surprisingness: 20629.63233541685
+=====================Similarity Graph=====================
+Found a total of 269 surprising instances
+Better performing instances:      0
+Worse performing instances:       269
+ID: 1
+Better performing instances: 0
+Worse performing instances: 0
+ID: 2
+Better performing instances: 0
+Worse performing instances: 0
+ID: 3
+Better performing instances: 0
+Worse performing instances: 0
+ID: 4
+Better performing instances: 0
+Worse performing instances: 0
+ID: 5
+Better performing instances: 0
+Worse performing instances: 0
+ID: 6
+Better performing instances: 0
+Worse performing instances: 0
+ID: 7
+Better performing instances: 0
+Worse performing instances: 0
+ID: 8
+Better performing instances: 0
+Worse performing instances: 0
+ID: 9
+Better performing instances: 0
+Worse performing instances: 0
+ID: 10
+Better performing instances: 0
+Worse performing instances: 0
+ID: 11
+Better performing instances: 0
+Worse performing instances: 0
+ID: 12
+Better performing instances: 0
+Worse performing instances: 0
+ID: 13
+Better performing instances: 0
+Worse performing instances: 0
+ID: 14
+Better performing instances: 0
+Worse performing instances: 0
+ID: 15
+Better performing instances: 0
+Worse performing instances: 0
+ID: 16
+Better performing instances: 0
+Worse performing instances: 0
+ID: 17
+Better performing instances: 0
+Worse performing instances: 0
+ID: 18
+Better performing instances: 0
+Worse performing instances: 0
+ID: 19
+Better performing instances: 0
+Worse performing instances: 0
+ID: 20
+Better performing instances: 0
+Worse performing instances: 0
+ID: 21
+Better performing instances: 0
+Worse performing instances: 0
+ID: 22
+Better performing instances: 0
+Worse performing instances: 0
+ID: 23
+Better performing instances: 0
+Worse performing instances: 0
+ID: 24
+Better performing instances: 0
+Worse performing instances: 0
+ID: 25
+Better performing instances: 0
+Worse performing instances: 0
+ID: 26
+Better performing instances: 0
+Worse performing instances: 0
+ID: 27
+Better performing instances: 0
+Worse performing instances: 0
+ID: 28
+Better performing instances: 0
+Worse performing instances: 0
+ID: 29
+Better performing instances: 0
+Worse performing instances: 0
+ID: 30
+Better performing instances: 0
+Worse performing instances: 0
+ID: 31
+Better performing instances: 0
+Worse performing instances: 0
+ID: 32
+Better performing instances: 0
+Worse performing instances: 0
+ID: 33
+Better performing instances: 0
+Worse performing instances: 0
+ID: 34
+Better performing instances: 0
+Worse performing instances: 0
+ID: 35
+Better performing instances: 0
+Worse performing instances: 0
+ID: 36
+Better performing instances: 0
+Worse performing instances: 0
+ID: 37
+Better performing instances: 0
+Worse performing instances: 0
+ID: 38
+Better performing instances: 0
+Worse performing instances: 0
+ID: 39
+Better performing instances: 0
+Worse performing instances: 0
+ID: 40
+Better performing instances: 0
+Worse performing instances: 0
+ID: 41
+Better performing instances: 0
+Worse performing instances: 0
+ID: 42
+Better performing instances: 0
+Worse performing instances: 0
+ID: 43
+Better performing instances: 0
+Worse performing instances: 0
+ID: 44
+Better performing instances: 0
+Worse performing instances: 0
+ID: 45
+Better performing instances: 0
+Worse performing instances: 0
+ID: 46
+Better performing instances: 0
+Worse performing instances: 0
+ID: 47
+Better performing instances: 0
+Worse performing instances: 0
+ID: 48
+Better performing instances: 0
+Worse performing instances: 0
+ID: 49
+Better performing instances: 0
+Worse performing instances: 0
+ID: 50
+Better performing instances: 0
+Worse performing instances: 0
+ID: 51
+Better performing instances: 0
+Worse performing instances: 0
+ID: 52
+Better performing instances: 0
+Worse performing instances: 0
+ID: 53
+Better performing instances: 0
+Worse performing instances: 0
+ID: 54
+Better performing instances: 0
+Worse performing instances: 0
+ID: 55
+Better performing instances: 0
+Worse performing instances: 0
+ID: 56
+Better performing instances: 0
+Worse performing instances: 0
+ID: 57
+Better performing instances: 0
+Worse performing instances: 0
+ID: 58
+Better performing instances: 0
+Worse performing instances: 0
+ID: 59
+Better performing instances: 0
+Worse performing instances: 0
+ID: 60
+Better performing instances: 0
+Worse performing instances: 0
+ID: 61
+Better performing instances: 0
+Worse performing instances: 0
+ID: 62
+Better performing instances: 0
+Worse performing instances: 0
+ID: 63
+Better performing instances: 0
+Worse performing instances: 0
+ID: 64
+Better performing instances: 0
+Worse performing instances: 0
+ID: 65
+Better performing instances: 0
+Worse performing instances: 0
+ID: 66
+Better performing instances: 0
+Worse performing instances: 0
+ID: 67
+Better performing instances: 0
+Worse performing instances: 0
+ID: 68
+Better performing instances: 0
+Worse performing instances: 0
+ID: 69
+Better performing instances: 0
+Worse performing instances: 0
+ID: 70
+Better performing instances: 0
+Worse performing instances: 0
+ID: 71
+Better performing instances: 0
+Worse performing instances: 0
+ID: 72
+Better performing instances: 0
+Worse performing instances: 0
+ID: 73
+Better performing instances: 0
+Worse performing instances: 0
+ID: 74
+Better performing instances: 0
+Worse performing instances: 0
+ID: 75
+Better performing instances: 0
+Worse performing instances: 0
+ID: 76
+Better performing instances: 0
+Worse performing instances: 0
+ID: 77
+Better performing instances: 0
+Worse performing instances: 0
+ID: 78
+Better performing instances: 0
+Worse performing instances: 0
+ID: 79
+Better performing instances: 0
+Worse performing instances: 0
+ID: 80
+Better performing instances: 0
+Worse performing instances: 0
+ID: 81
+Better performing instances: 0
+Worse performing instances: 0
+ID: 82
+Better performing instances: 0
+Worse performing instances: 0
+ID: 83
+Better performing instances: 0
+Worse performing instances: 0
+ID: 84
+Better performing instances: 0
+Worse performing instances: 0
+ID: 85
+Better performing instances: 0
+Worse performing instances: 0
+ID: 86
+Better performing instances: 0
+Worse performing instances: 0
+ID: 87
+Better performing instances: 0
+Worse performing instances: 0
+ID: 88
+Better performing instances: 0
+Worse performing instances: 0
+ID: 89
+Better performing instances: 0
+Worse performing instances: 0
+ID: 90
+Better performing instances: 0
+Worse performing instances: 0
+ID: 91
+Better performing instances: 0
+Worse performing instances: 0
+ID: 92
+Better performing instances: 0
+Worse performing instances: 0
+ID: 93
+Better performing instances: 0
+Worse performing instances: 0
+ID: 94
+Better performing instances: 0
+Worse performing instances: 0
+ID: 95
+Better performing instances: 0
+Worse performing instances: 0
+ID: 96
+Better performing instances: 0
+Worse performing instances: 0
+ID: 97
+Better performing instances: 0
+Worse performing instances: 0
+ID: 98
+Better performing instances: 0
+Worse performing instances: 0
+ID: 99
+Better performing instances: 0
+Worse performing instances: 0
+ID: 100
+Better performing instances: 0
+Worse performing instances: 0
+ID: 101
+Better performing instances: 0
+Worse performing instances: 0
+ID: 102
+Better performing instances: 0
+Worse performing instances: 0
+ID: 103
+Better performing instances: 0
+Worse performing instances: 0
+ID: 104
+Better performing instances: 0
+Worse performing instances: 0
+ID: 105
+Better performing instances: 0
+Worse performing instances: 0
+ID: 106
+Better performing instances: 0
+Worse performing instances: 0
+ID: 107
+Better performing instances: 0
+Worse performing instances: 0
+ID: 108
+Better performing instances: 0
+Worse performing instances: 0
+ID: 109
+Better performing instances: 0
+Worse performing instances: 0
+ID: 110
+Better performing instances: 0
+Worse performing instances: 166
+Effectiveness: 525729862.1114721
+Surprisingness: 31670.495370775978
+ID: 111
+Better performing instances: 0
+Worse performing instances: 103
+Effectiveness: 371227093.33384454
+Surprisingness: 36041.48424855999
+ID: 112
+Better performing instances: 0
+Worse performing instances: 0
