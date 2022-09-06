@@ -1,0 +1,282 @@
+Number of situations:                   150370 cases
+Features in event log:            35
+
+=====================Boxplots=====================
+Found a total of 439 surprising instances
+IQR: 51238800.0 - lb: -126.0 weeks, 4.0 days, 10.0 hours, 30.0 minutes - ub: 213.0 weeks, 3.0 days, 14.0 hours, 30.0 minutes - Q1: 1.0 week, 5.0 days - Q3: 86.0 weeks, 3.0 days, 1.0 hour
+Better performing instances: 0
+Worse performing instances: 439
+=====================Decision Tree=====================
+Found a total of 16238 surprising instances
+Better performing instances: 4481
+Worse performing instances: 11757
+Node: [42]- 104: [event:amount > 38.5, event:totalPaymentAmount > 6.5, event:totalPaymentAmount > 90.95000076293945, event:totalPaymentAmount > 91.25, event:totalPaymentAmount > 127.0]
+Better performing instances: 0
+Worse performing instances: 37
+Effectiveness: 2699295865.380779
+Surprisingness: 729539.4351093947
+Node: [41]- 101: [event:amount > 38.5, event:totalPaymentAmount > 6.5, event:totalPaymentAmount > 90.95000076293945, event:totalPaymentAmount > 91.25, event:totalPaymentAmount <= 127.0]
+Better performing instances: 0
+Worse performing instances: 34
+Effectiveness: 1759967214.8936172
+Surprisingness: 517637.4451124792
+Node: [39]- 261: [event:amount > 38.5, event:totalPaymentAmount > 6.5, event:totalPaymentAmount > 90.95000076293945, event:totalPaymentAmount <= 91.25]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [37]- 111: [event:amount > 38.5, event:totalPaymentAmount > 6.5, event:totalPaymentAmount <= 90.95000076293945, event:article > 157.5]
+Better performing instances: 0
+Worse performing instances: 626
+Effectiveness: 30979671462.361553
+Surprisingness: 494883.0348141441
+Node: [36]- 1742: [event:amount > 38.5, event:totalPaymentAmount > 6.5, event:totalPaymentAmount <= 90.95000076293945, event:article <= 157.5, event:totalPaymentAmount > 49.375]
+Better performing instances: 0
+Worse performing instances: 125
+Effectiveness: 6720809996.119886
+Surprisingness: 537664.8148438891
+Node: [35]- 384: [event:amount > 38.5, event:totalPaymentAmount > 6.5, event:totalPaymentAmount <= 90.95000076293945, event:article <= 157.5, event:totalPaymentAmount <= 49.375]
+Better performing instances: 0
+Worse performing instances: 656
+Effectiveness: 35479065632.57052
+Surprisingness: 540839.4946020137
+Node: [31]- 114: [event:amount > 38.5, event:totalPaymentAmount <= 6.5, event:amount > 75.75, event:amount > 78.11000061035156, event:amount > 254.3050079345703]
+Better performing instances: 101
+Effectiveness: 8166802332611.514
+Surprisingness: 543478.8747613627
+Worse performing instances: 170
+Effectiveness: 13830322137.45174
+Surprisingness: 813548.4025308886
+Node: [30]- 143: [event:amount > 38.5, event:totalPaymentAmount <= 6.5, event:amount > 75.75, event:amount > 78.11000061035156, event:amount <= 254.3050079345703]
+Better performing instances: 1710
+Effectiveness: 7476351637194.47
+Surprisingness: 502916.3127594588
+Worse performing instances: 403
+Effectiveness: 25564298116.83502
+Surprisingness: 634349.8651613025
+Node: [28]- 1361: [event:amount > 38.5, event:totalPaymentAmount <= 6.5, event:amount > 75.75, event:amount <= 78.11000061035156]
+Better performing instances: 1
+Effectiveness: 9565835789688.945
+Surprisingness: 636157.4388615616
+Worse performing instances: 0
+Node: [26]- 265: [event:amount > 38.5, event:totalPaymentAmount <= 6.5, event:amount <= 75.75, event:article > 157.5, event:amount > 64.04500007629395]
+Better performing instances: 490
+Effectiveness: 6791427120705.595
+Surprisingness: 453124.41399138764
+Worse performing instances: 308
+Effectiveness: 20676135257.546505
+Surprisingness: 671303.1597193062
+Node: [25]- 376: [event:amount > 38.5, event:totalPaymentAmount <= 6.5, event:amount <= 75.75, event:article > 157.5, event:amount <= 64.04500007629395]
+Better performing instances: 269
+Effectiveness: 7539829778249.264
+Surprisingness: 502317.1934697597
+Worse performing instances: 94
+Effectiveness: 3889854753.388822
+Surprisingness: 413814.37102669734
+Node: [23]- 4629: [event:amount > 38.5, event:totalPaymentAmount <= 6.5, event:amount <= 75.75, event:article <= 157.5, event:amount > 72.75]
+Better performing instances: 264
+Effectiveness: 6728900207950.756
+Surprisingness: 448276.6084987913
+Worse performing instances: 100
+Effectiveness: 6001071535.1460905
+Surprisingness: 600107.1699570606
+Node: [22]- 1886: [event:amount > 38.5, event:totalPaymentAmount <= 6.5, event:amount <= 75.75, event:article <= 157.5, event:amount <= 72.75]
+Better performing instances: 1575
+Effectiveness: 7272026333395.814
+Surprisingness: 488727.9231633359
+Worse performing instances: 2784
+Effectiveness: 155497937672.03714
+Surprisingness: 558541.5377423578
+Node: [17]- 203: [event:amount <= 38.5, event:totalPaymentAmount > 17.420000076293945, event:totalPaymentAmount > 39.2549991607666]
+Better performing instances: 0
+Worse performing instances: 124
+Effectiveness: 3801742613.7313433
+Surprisingness: 306592.20379442984
+Node: [16]- 7935: [event:amount <= 38.5, event:totalPaymentAmount > 17.420000076293945, event:totalPaymentAmount <= 39.2549991607666, event:amount > 21.5, event:amount > 33.89999961853027]
+Better performing instances: 0
+Worse performing instances: 3580
+Effectiveness: 15657630725.314909
+Surprisingness: 43736.55099484791
+Node: [15]- 783: [event:amount <= 38.5, event:totalPaymentAmount > 17.420000076293945, event:totalPaymentAmount <= 39.2549991607666, event:amount > 21.5, event:amount <= 33.89999961853027]
+Better performing instances: 0
+Worse performing instances: 2392
+Effectiveness: 10463013943.78087
+Surprisingness: 43741.847405495115
+Node: [13]- 120: [event:amount <= 38.5, event:totalPaymentAmount > 17.420000076293945, event:totalPaymentAmount <= 39.2549991607666, event:amount <= 21.5]
+Better performing instances: 0
+Worse performing instances: 53
+Effectiveness: 812783137.4999999
+Surprisingness: 153355.36618145718
+Node: [10]- 760: [event:amount <= 38.5, event:totalPaymentAmount <= 17.420000076293945, event:amount > 36.78000068664551]
+Better performing instances: 0
+Worse performing instances: 0
+Node: [9]- 2339: [event:amount <= 38.5, event:totalPaymentAmount <= 17.420000076293945, event:amount <= 36.78000068664551, event:amount > 35.5, event:article > 82.0]
+Better performing instances: 0
+Worse performing instances: 44
+Effectiveness: 518700162.9242821
+Surprisingness: 117886.4166499307
+Node: [8]- 159: [event:amount <= 38.5, event:totalPaymentAmount <= 17.420000076293945, event:amount <= 36.78000068664551, event:amount > 35.5, event:article <= 82.0]
+Better performing instances: 0
+Worse performing instances: 8
+Effectiveness: 81198789.04109588
+Surprisingness: 101498.49967974823
+Node: [6]- 614: [event:amount <= 38.5, event:totalPaymentAmount <= 17.420000076293945, event:amount <= 36.78000068664551, event:amount <= 35.5, event:article > 86.0]
+Better performing instances: 71
+Effectiveness: 1434648535180.0615
+Surprisingness: 95452.97545038376
+Worse performing instances: 183
+Effectiveness: 3071914658.467411
+Surprisingness: 167864.21308866044
+Node: [5]- 610: [event:amount <= 38.5, event:totalPaymentAmount <= 17.420000076293945, event:amount <= 36.78000068664551, event:amount <= 35.5, event:article <= 86.0]
+Better performing instances: 0
+Worse performing instances: 36
+Effectiveness: 753778206.7341913
+Surprisingness: 209382.8448650968
+=====================K-Means=====================
+Found a total of 7782 surprising instances
+Better performing instances:      38
+Worse performing instances:       7744
+ID: 1
+Better performing instances: 0
+Effectiveness: 233385497065.10742
+Surprisingness: 328111.3832318262
+ID: 2
+Better performing instances: 0
+Effectiveness: 12397623970.827957
+Surprisingness: 1392991.4596202765
+ID: 3
+Better performing instances: 0
+Effectiveness: 361810740.5504587
+Surprisingness: 1206035.8036480492
+ID: 4
+Better performing instances: 0
+Effectiveness: 522995081.5384615
+Surprisingness: 1743316.942254642
+ID: 5
+Better performing instances: 0
+Effectiveness: 573474221.9030521
+Surprisingness: 1146948.4482296966
+ID: 6
+Better performing instances: 0
+Effectiveness: 2467416620.4545455
+Surprisingness: 1298640.335381866
+ID: 7
+Better performing instances: 0
+Effectiveness: 165611908.1530782
+Surprisingness: 1656119.0831753002
+ID: 8
+Better performing instances: 0
+Effectiveness: 11995667146.751478
+Surprisingness: 638067.428829813
+ID: 9
+Better performing instances: 0
+ID: 10
+Better performing instances: 0
+Effectiveness: 132878963.90977444
+Surprisingness: 1328789.6428056096
+ID: 11
+Better performing instances: 0
+Effectiveness: 822642551.3513514
+Surprisingness: 1371070.9277582048
+ID: 12
+Better performing instances: 0
+Effectiveness: 326426806.01503754
+Surprisingness: 1088089.375221694
+ID: 13
+Better performing instances: 0
+ID: 14
+Better performing instances: 0
+Effectiveness: 211754680.98591548
+Surprisingness: 1058773.4058002897
+ID: 15
+Better performing instances: 0
+Effectiveness: 3672933391.502278
+Surprisingness: 680172.8701518051
+ID: 16
+Better performing instances: 0
+Effectiveness: 389862000.0
+Surprisingness: 1299540.0159677418
+ID: 17
+Better performing instances: 0
+ID: 18
+Better performing instances: 0
+ID: 19
+Better performing instances: 0
+Effectiveness: 298916032.8358209
+Surprisingness: 996386.7816296071
+ID: 20
+Better performing instances: 0
+ID: 21
+Better performing instances: 0
+Effectiveness: 29164660085.76524
+Surprisingness: 1388793.3417599504
+ID: 22
+Better performing instances: 38
+Effectiveness: 14485870610.526316
+Surprisingness: 474946.68707360583
+Effectiveness: 641664851.497006
+Surprisingness: 712960.9720844609
+ID: 23
+Better performing instances: 0
+ID: 24
+Better performing instances: 0
+Effectiveness: 6182589909.224905
+Surprisingness: 1932059.3546186665
+ID: 25
+Better performing instances: 0
+=====================Similarity Graph=====================
+Found a total of 5864 surprising instances
+Better performing instances:      1659
+Worse performing instances:       4205
+ID: 1
+Better performing instances: 1659
+Effectiveness: 3243069087090.054
+Surprisingness: 438015.83572819945
+Worse performing instances: 2687
+Effectiveness: 149937110395.25006
+Surprisingness: 558009.3778846535
+ID: 2
+Better performing instances: 0
+Worse performing instances: 0
+ID: 3
+Better performing instances: 0
+Worse performing instances: 28
+Effectiveness: 1420594170.4918036
+Surprisingness: 507355.1628016944
+ID: 4
+Better performing instances: 0
+Worse performing instances: 1
+Effectiveness: 99256481.63265306
+Surprisingness: 992564.8361265307
+ID: 5
+Better performing instances: 0
+Worse performing instances: 414
+Effectiveness: 52248177771.89781
+Surprisingness: 1262033.4367899578
+ID: 6
+Better performing instances: 0
+Worse performing instances: 0
+ID: 7
+Better performing instances: 0
+Worse performing instances: 0
+ID: 8
+Better performing instances: 0
+Worse performing instances: 0
+ID: 9
+Better performing instances: 0
+Worse performing instances: 2
+Effectiveness: 148564092.85714287
+Surprisingness: 742820.4816541354
+ID: 10
+Better performing instances: 0
+Worse performing instances: 69
+Effectiveness: 9670929232.160803
+Surprisingness: 1401584.0492575397
+ID: 11
+Better performing instances: 0
+Worse performing instances: 8
+Effectiveness: 955442666.992665
+Surprisingness: 1194303.3527336372
+ID: 12
+Better performing instances: 0
+Worse performing instances: 996
+Effectiveness: 22112372626.470116
+Surprisingness: 222011.7873383695

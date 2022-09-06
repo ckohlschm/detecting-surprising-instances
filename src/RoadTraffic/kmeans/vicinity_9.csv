@@ -1,0 +1,13 @@
+,@@case_id_column,event:concept:name@Add penalty,event:concept:name@Appeal to Judge,event:concept:name@Create Fine,event:concept:name@Insert Date Appeal to Prefecture,event:concept:name@Insert Fine Notification,event:concept:name@Notify Result Appeal to Offender,event:concept:name@Payment,event:concept:name@Receive Result Appeal from Prefecture,event:concept:name@Send Appeal to Prefecture,event:concept:name@Send Fine,event:concept:name@Send for Credit Collection,event:vehicleClass@A,event:vehicleClass@C,event:vehicleClass@M,event:vehicleClass@R,event:article,event:totalPaymentAmount,event:points,event:amount,@@caseDuration,@@num_occurrence_Payment,@@num_occurrence_Insert Date Appeal to Prefecture,@@num_occurrence_Notify Result Appeal to Offender,@@num_occurrence_Insert Fine Notification,@@num_occurrence_Send Appeal to Prefecture,@@num_occurrence_Add penalty,@@num_occurrence_Receive Result Appeal from Prefecture,@@num_occurrence_Send for Credit Collection,@@num_occurrence_Create Fine,@@num_occurrence_Send Fine,@@num_occurrence_Appeal to Judge,Throughput Time,cluster_id,days
+27243,C20856,1,0,1,0,1,0,0,0,0,1,1,0,0,1,0,143,0.0,10,613.5,68511600.0,0,0,0,1,0,1,0,0,1,1,0,792 days 23:00:00,8,792
+145872,V15419,1,1,1,1,1,1,0,1,1,1,0,0,0,1,0,142,0.0,10,716.5,49762800.0,0,1,1,1,1,1,1,0,1,1,0,575 days 23:00:00,8,575
+146129,V16433,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0,142,727.5,10,716.5,28422000.0,1,0,0,1,0,1,0,0,1,1,0,328 days 23:00:00,8,328
+146172,V16605,1,0,1,0,1,0,0,0,0,1,1,0,0,1,0,142,0.0,10,716.5,71708400.0,0,0,0,1,0,1,0,0,1,1,0,829 days 23:00:00,8,829
+146233,V16855,1,0,1,0,1,0,0,0,0,1,1,0,0,1,0,142,0.0,10,742.5,48038400.0,0,0,0,1,0,1,0,0,1,1,0,556 days 00:00:00,8,556
+146261,V16935,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0,142,755.5,10,742.5,22719600.0,1,0,0,1,0,1,0,0,1,1,0,262 days 23:00:00,8,262
+146339,V17224,1,0,1,0,1,0,0,0,0,1,1,0,0,1,0,142,0.0,10,742.5,79401600.0,0,0,0,1,0,1,0,0,1,1,0,919 days 00:00:00,8,919
+146654,V18085,1,0,1,0,1,0,0,0,0,1,1,0,0,1,0,142,0.0,10,742.5,59353200.0,0,0,0,1,0,1,0,0,1,1,0,686 days 23:00:00,8,686
+146748,V18367,1,0,1,0,1,0,0,0,0,1,1,0,0,1,0,142,0.0,10,742.5,94777200.0,0,0,0,1,0,1,0,0,1,1,0,1096 days 23:00:00,8,1096
+146751,V18375,1,1,1,0,1,0,1,0,0,1,0,0,0,1,0,142,756.0,10,742.5,76633200.0,0,0,0,1,0,1,0,0,1,1,1,886 days 23:00:00,8,886
+146794,V18495,1,0,1,0,1,0,0,0,0,1,1,0,0,1,0,142,0.0,10,742.5,89856000.0,0,0,0,1,0,1,0,0,1,1,0,1040 days 00:00:00,8,1040
+146829,V18575,1,0,1,0,1,0,0,0,0,1,1,0,0,1,0,142,0.0,10,742.5,88128000.0,0,0,0,1,0,1,0,0,1,1,0,1020 days 00:00:00,8,1020
